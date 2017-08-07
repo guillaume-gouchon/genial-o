@@ -14,4 +14,6 @@ raspiRobotBoard = RRB3(BATTERY_VOLTAGE, MOTOR_VOLTAGE)
 def main():
     # Main program block
     setLeftLed(0)
+    setRightLed(0)
+    printText('Je suis GENIAL-O', 2)
     print(getFrontDistance())

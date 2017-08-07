@@ -1,6 +1,6 @@
-from RPLCD import CharLCD, cleared, cursor
+from RPLCD.i2c import CharLCD
 
-# lcd = CharLCD()
+lcd = CharLCD('PCF8574', 0x3f)
 
 def setLeftLed(enabled):
     print('setLeftLed', enabled)
@@ -12,5 +12,4 @@ def setRightLed(enabled):
 
 def printText(text, line):
     print('printText', text, 'line=', line)
-    with cursor(lcd, --line, 0):
-        lcd.write_string(text)
+    lcd.write_string(text)
