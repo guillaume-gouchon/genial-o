@@ -1,5 +1,5 @@
 from flask import Flask
-from contollers.see import camera
+from controllers.see import camera
 
 app = Flask(__name__)
 
