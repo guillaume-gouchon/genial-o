@@ -1,19 +1,21 @@
-from rrb3 import *
-
-import controllers.display
-import controllers.detect
-import controllers.move
-import controllers.speak
-
-BATTERY_VOLTAGE = 6 * 1.5
-MOTOR_VOLTAGE = 6
-
-raspiRobotBoard = RRB3(BATTERY_VOLTAGE, MOTOR_VOLTAGE)
-
+import controllers.display as display
+import controllers.detect as detect
+import controllers.move as move
+import controllers.speak as speak
+import controllers.see as see
+import time
 
 def main():
     # Main program block
-    setLeftLed(0)
-    setRightLed(0)
-    printText('Je suis GENIAL-O', 2)
-    print(getFrontDistance())
+    display.setLeftLed(0)
+    display.setRightLed(0)
+    display.printText('Je suis GENIAL-O', 1)
+
+    while True:
+        display.printText(detect.getFrontDistance(), 3)
+        time.sleep(5)
+
+    see.startCamera()
+
+if __name__ == '__main__':
+   main()

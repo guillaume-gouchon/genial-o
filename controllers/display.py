@@ -1,4 +1,5 @@
 from RPLCD.i2c import CharLCD
+from board import raspiRobotBoard
 
 lcd = CharLCD('PCF8574', 0x3f)
 
@@ -12,4 +13,5 @@ def setRightLed(enabled):
 
 def printText(text, line):
     print('printText', text, 'line=', line)
-    lcd.write_string(text)
+    lcd.cursor_pos = (line - 1, 0)
+    lcd.write_string(str(text))
