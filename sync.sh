@@ -1,1 +1,1 @@
-resin sync --source . --destination /app
+resin sync d44bfe5 --source . --destination /app

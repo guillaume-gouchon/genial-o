@@ -1,2 +1,3 @@
 python robot.py &
-python server.py
+export FLASK_APP=server.py;
+python -m flask run
