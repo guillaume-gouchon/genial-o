@@ -1,6 +1,6 @@
 from picamera import PiCamera
 
-camera = PiCamera()
+# camera = PiCamera()
 
 def startCamera():
     camera.start_preview()

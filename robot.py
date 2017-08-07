@@ -3,7 +3,7 @@ import controllers.detect as detect
 import controllers.move as move
 import controllers.speak as speak
 import controllers.see as see
-import time
+from time import *
 
 def main():
     # Main program block
@@ -13,9 +13,7 @@ def main():
 
     while True:
         display.printText(detect.getFrontDistance(), 3)
-        time.sleep(5)
-
-    see.startCamera()
+        sleep(5)
 
 if __name__ == '__main__':
    main()
