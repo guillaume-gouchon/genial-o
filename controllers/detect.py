@@ -19,6 +19,7 @@ def get_front_distance():
     return distance
 
 def __get_distance(sensor, name):
+    print("__get_distance", name)
     raw_measurement = sensor.raw_distance()
     metric_distance = sensor.distance_metric(raw_measurement)
     print("get", name, "distance=", metric_distance)

@@ -15,6 +15,11 @@ RUN apt-get update && apt-get install python-smbus
 # install text-to-speech library
 RUN apt-get install espeak
 
+# install supervisor and start server
+RUN apt-get install supervisor
+COPY supervisor.conf /etc/supervisor/conf.d/
+RUN supervisor reload
+
 # copy sources
 COPY . /app
 WORKDIR /app
@@ -23,4 +28,5 @@ WORKDIR /app
 CMD ["modprobe" "v4l2_common"]
 
 # run robot and api
-CMD ["bash","start.sh"]
+CMD ["supervisor","start server.py"]
+CMD ["python","robot.py"]
