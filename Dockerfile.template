@@ -28,5 +28,4 @@ WORKDIR /app
 CMD ["modprobe" "v4l2_common"]
 
 # run robot and api
-CMD ["forever", "start", "-c python", "server.py"]
-CMD ["python","robot.py"]
+CMD ["bash","start.sh"]
