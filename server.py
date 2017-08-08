@@ -13,20 +13,16 @@ def hello():
     return "Hello, je suis GENIAL-O"
 
 @app.route("/detect")
-def detect():
-    front=detect.get_front_distance(),
-    left=detect.get_left_distance(),
-    right=detect.get_right_distance(),
-    back=detect.get_back_distance()
+def get_distances():
     return jsonify(
-        front=front,
-        left=left,
-        right=right,
-        back=back,
+        front=detect.get_front_distance(),
+        # left=detect.get_left_distance(),
+        # right=detect.get_right_distance(),
+        # back=detect.get_back_distance(),
     )
 
 @app.route("/camera")
-def camera():
+def get_camera_image():
     return send_file(see.LATEST_PIC_PATH, mimetype="image/jpg")
 
 @app.route("/print", methods=["POST"])
@@ -36,7 +32,7 @@ def print_text():
     display.print_text(text, line)
 
 @app.route("/talk", methods=["POST"])
-def talk():
+def make_talk():
     text=request.form["text"]
     speak.talk(text)
 
@@ -46,7 +42,7 @@ def set_auto_pilot():
     move.set_auto_pilot(auto_pilot)
 
 @app.route("/move", methods=["POST"])
-def move():
+def make_move():
     speed=request.form["speed"]
     direction=request.form["direction"]
     if direction == "forward":

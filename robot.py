@@ -16,5 +16,5 @@ def main():
         display.print_text(detect.get_front_distance(), 3)
         sleep(5)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
    main()
