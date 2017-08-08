@@ -7,21 +7,17 @@ import controllers.detect as detect
 import controllers.move as move
 import controllers.speak as speak
 import controllers.see as see
+from controllers.status import *
 
 def main():
     # main program block
     display.clear_text()
     display.set_left_led(0)
-    display.set_right_led(1)
-    display.print_text("Hello", 1)
-    display.print_text("Je suis GENIAL-O", 2)
+    display.set_right_led(0)
+    display.print_text("Hello, je suis GENIAL-O", 1)
 
-    i = 0
-    while True:
-        display.print_text("        {}".format(i), 4)
-        i++
-        sleep(1)
-
+    CheckInternet()
+    CheckHardware()
 
 if __name__ == "__main__":
     # start robot and server on different processes
