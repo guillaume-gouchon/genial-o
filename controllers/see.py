@@ -1,11 +1,12 @@
 from picamera import PiCamera
 
-# camera = PiCamera()
+CAMERA_WARM_UP=2 # in seconds
+LATEST_PIC_PATH ="/pics/latest.jpg"
 
-def startCamera():
+camera = PiCamera()
+camera.resolution = (1024, 768)
+
+def takePicture():
     camera.start_preview()
-    camera.start_recording('/app/video.h264')
-
-def stopCamera():
-    camera.stop_recording()
-    camera.stop_preview()
+    time.sleep(CAMERA_WARM_UP)
+    camera.capture(LATEST_PIC_PATH)

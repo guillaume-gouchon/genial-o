@@ -2,3 +2,5 @@ RRB3
 RPLCD
 Flask
 picamera
+hcsr04sensor
+talkey

@@ -1,18 +1,26 @@
 FROM resin/raspberrypi3-python
 
-#switch on systemd init system in container
+# switch on systemd init system in container
 ENV INITSYSTEM on
 ENV READTHEDOCS True
 
 # pip install python deps from requirements.txt
-# For caching until requirements.txt changes
+# for caching until requirements.txt changes
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
-# missing library for RPLCD.i2c
+# install missing library for RPLCD.i2c
 RUN apt-get update && apt-get install python-smbus
 
+# install text-to-speech library
+RUN apt-get install espeak
+
+# enable camera
+RUN modprobe v4l2_common
+
+# copy sources
 COPY . /app
 WORKDIR /app
 
-CMD ["bash","start.sh"]
+CMD ["python","robot.py"]
+CMD ["python","server.py"]

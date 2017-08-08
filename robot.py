@@ -1,18 +1,19 @@
+from time import *
+
 import controllers.display as display
 import controllers.detect as detect
 import controllers.move as move
 import controllers.speak as speak
 import controllers.see as see
-from time import *
 
 def main():
     # Main program block
-    display.setLeftLed(0)
-    display.setRightLed(0)
-    display.printText('Je suis GENIAL-O', 1)
+    display.set_left_led(0)
+    display.set_right_led(0)
+    display.print_text("Je suis GENIAL-O", 1)
 
     while True:
-        display.printText(detect.getFrontDistance(), 3)
+        display.print_text(detect.get_front_distance(), 3)
         sleep(5)
 
 if __name__ == '__main__':
