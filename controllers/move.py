@@ -30,7 +30,7 @@ def set_auto_pilot(is_auto_pilot):
     if auto_pilot == 1:
         start_auto_pilot()
 
-def start_auto_pilot:
+def start_auto_pilot():
     print("start auto pilot")
     while auto_pilot:
         # TODO
