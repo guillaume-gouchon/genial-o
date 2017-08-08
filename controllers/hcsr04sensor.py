@@ -4,7 +4,7 @@ import time
 
 class HCSR04(object):
 
-    TIMEOUT = 5 # in milliseconds
+    TIMEOUT = 5 # in number of iterations
 
     def __init__(self, trigger_pin, echo_pin):
         self.trigger_pin = trigger_pin
@@ -25,9 +25,9 @@ class HCSR04(object):
 
     def get_distance(self):
         self._send_trigger_pulse()
-        self._wait_for_echo(True)
+        # self._wait_for_echo(True)
         start = time.time()
-        self._wait_for_echo(False)
+        # self._wait_for_echo(False)
         finish = time.time()
         pulse_len = finish - start
         distance_cm = pulse_len / 0.000058

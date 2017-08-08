@@ -16,6 +16,13 @@ def main():
     display.print_text("Hello", 1)
     display.print_text("Je suis GENIAL-O", 2)
 
+    i = 0
+    while True:
+        display.print_text("        {}".format(i), 4)
+        i++
+        sleep(1)
+
+
 def flaskThread():
     server.app.run(host="0.0.0.0", port=80)
 
