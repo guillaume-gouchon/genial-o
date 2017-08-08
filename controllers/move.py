@@ -32,5 +32,5 @@ def set_auto_pilot(is_auto_pilot):
 
 def start_auto_pilot():
     print("start auto pilot")
-    while auto_pilot:
-        # TODO
+#     while auto_pilot:
+#         # TODO

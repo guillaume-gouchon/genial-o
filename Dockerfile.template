@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install python-smbus
 # install text-to-speech library
 RUN apt-get install espeak
 
+# enable sound
+RUN echo snd_bcm2835 &>> /etc/modules
+
 # copy sources
 COPY . /app
 WORKDIR /app

@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, jsonify
 
 import controllers.display as display
 import controllers.detect as detect
@@ -14,11 +14,15 @@ def hello():
 
 @app.route("/detect")
 def detect():
-    return flask.jsonify(
-        front=detect.get_front_distance(),
-        left=detect.get_left_distance(),
-        right=detect.get_right_distance(),
-        back=detect.get_back_distance()
+    front=detect.get_front_distance(),
+    left=detect.get_left_distance(),
+    right=detect.get_right_distance(),
+    back=detect.get_back_distance()
+    return jsonify(
+        front=front,
+        left=left,
+        right=right,
+        back=back,
     )
 
 @app.route("/camera")
