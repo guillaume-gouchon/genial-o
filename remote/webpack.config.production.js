@@ -2,18 +2,18 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: './scripts/index',
+  entry: './app/components/Main.js',
   output: {
     path: path.join(__dirname, 'static'),
     filename: 'bundle.js',
     publicPath: '/'
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['*', '.js']
   },
   devtool: 'source-map',
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
@@ -29,8 +29,8 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
-        include: path.join(__dirname, 'scripts')
+        loaders: ['babel-loader'],
+        include: path.join(__dirname, 'app')
       }
     ]
   }

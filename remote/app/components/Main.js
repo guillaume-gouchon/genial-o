@@ -1,14 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import { render } from 'react-dom';
+import App from './App';
 
-var Main = React.createClass({
-    render: function() {
-    return (
-        <div>
-            Hello World
-        </div>
-        )
-    }
-});
-
-ReactDOM.render(<Main />, document.getElementById('app'));
+render(
+  <App />,
+  document.getElementById('app')
+);
