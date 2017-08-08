@@ -23,5 +23,5 @@ WORKDIR /app
 CMD ["modprobe" "v4l2_common"]
 
 # run robot and api
-CMD ["python","robot.py"]
 CMD ["python","server.py"]
+CMD ["python","robot.py"]
