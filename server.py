@@ -29,18 +29,21 @@ def get_camera_image():
 @app.route("/print", methods=["POST"])
 def print_text():
     text=request.form["text"]
-    line=request.form["line"]
+    line=int(float(request.form["line"]))
     display.print_text(text, line)
+    return "OK"
 
 @app.route("/talk", methods=["POST"])
 def make_talk():
     text=request.form["text"]
     speak.talk(text)
+    return "OK"
 
 @app.route("/pilot", methods=["PUT"])
 def set_auto_pilot():
     auto_pilot=request.form["auto_pilot"]
     move.set_auto_pilot(auto_pilot)
+    return "OK"
 
 @app.route("/move", methods=["POST"])
 def make_move():
@@ -54,7 +57,9 @@ def make_move():
         move.rotate_right(speed)
     elif direction == "backward":
         move.go_backward(speed)
+    return "OK"
 
 @app.route("/stop", methods=["POST"])
 def stop():
     move.stop()
+    return "OK"

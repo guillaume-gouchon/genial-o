@@ -20,4 +20,6 @@ def clear_text():
 def print_text(text, line):
     print("print_text", text, "line=", line)
     lcd.cursor_pos = (line - 1, 0)
+    lcd.write_string("                    ");
+    lcd.cursor_pos = (line - 1, 0)
     lcd.write_string(str(text))

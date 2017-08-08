@@ -3,7 +3,7 @@
 A robot which moves, learns, and discover things using machine learning.
 
 ### TODO
-- install ultra sound sensors on GPIO + code
+- ultra sound sensors
 - make camera work
 - serve video via Flask
-- Android app
+- web app
