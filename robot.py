@@ -23,12 +23,9 @@ def main():
         sleep(1)
 
 
-def flaskThread():
-    server.app.run(host="0.0.0.0", port=80)
-
 if __name__ == "__main__":
-    # start server on a different process
-    p = Process(target=flaskThread, args=())
+    # start robot and server on different processes
+    p = Process(target=main, args=())
     p.start()
-    main()
+    server.app.run(host="0.0.0.0", port=80)
     p.join()
