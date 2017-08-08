@@ -13,10 +13,7 @@ RUN pip install -r /requirements.txt
 RUN apt-get update && apt-get install python-smbus
 
 # install text-to-speech library
-RUN apt-get install festival
-
-# enable sound
-RUN echo snd_bcm2835 &>> /etc/modules
+RUN sudo apt-get install espeak
 
 # copy sources
 COPY . /app
