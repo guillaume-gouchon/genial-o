@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install python-smbus
 RUN apt-get install espeak
 
 # install supervisor and start server
-RUN apt-get install supervisor
 COPY supervisor.conf /etc/supervisor/conf.d/
 RUN supervisor reload
 

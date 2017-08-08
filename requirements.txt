@@ -3,3 +3,4 @@ RPLCD
 Flask
 picamera
 hcsr04sensor
+supervisor
