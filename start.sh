@@ -1,2 +1,2 @@
-python robot.py;
+python robot.py &;
 python server.py;
