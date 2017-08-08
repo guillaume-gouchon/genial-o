@@ -1,4 +1,4 @@
-from espeak import espeak
+import subprocess
 
 def talk(text):
-    espeak.synth(text)
+    subprocess.call(['espeak "' + text + '" 2>/dev/null'])
