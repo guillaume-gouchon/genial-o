@@ -5,6 +5,7 @@ LCD_PORT_EXPANDER = "PCF8574"
 LCD_DISPLAY_ADDRESS = 0x3f
 lcd = CharLCD(LCD_PORT_EXPANDER, LCD_DISPLAY_ADDRESS)
 
+
 def set_left_led(enabled):
     print("set_left_led", enabled)
     raspi_robot_board.set_led1(1 if enabled else 0);
@@ -12,6 +13,9 @@ def set_left_led(enabled):
 def set_right_led(enabled):
     print("set_right_led", enabled)
     raspi_robot_board.set_led2(1 if enabled else 0);
+
+def clear_text():
+    lcd.clear()
 
 def print_text(text, line):
     print("print_text", text, "line=", line)

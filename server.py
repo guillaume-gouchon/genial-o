@@ -16,9 +16,9 @@ def hello():
 def get_distances():
     return jsonify(
         front=detect.get_front_distance(),
-        # left=detect.get_left_distance(),
-        # right=detect.get_right_distance(),
-        # back=detect.get_back_distance(),
+        left=detect.get_left_distance(),
+        right=detect.get_right_distance(),
+        back=detect.get_back_distance(),
     )
 
 @app.route("/camera")
