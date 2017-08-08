@@ -1,4 +1,4 @@
-from flask import Flask, send_file, jsonify
+from flask import Flask, send_file, jsonify, request
 
 import controllers.display as display
 import controllers.detect as detect
@@ -7,6 +7,7 @@ import controllers.speak as speak
 import controllers.see as see
 
 app = Flask(__name__)
+app.use_reloader=False
 
 @app.route("/")
 def hello():
@@ -57,6 +58,3 @@ def make_move():
 @app.route("/stop", methods=["POST"])
 def stop():
     move.stop()
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80)

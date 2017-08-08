@@ -15,11 +15,6 @@ RUN apt-get update && apt-get install python-smbus
 # install text-to-speech library
 RUN apt-get install espeak
 
-RUN apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
-RUN apt-get install -y nodejs
-RUN npm install forever -g
-
 # copy sources
 COPY . /app
 WORKDIR /app
@@ -27,5 +22,5 @@ WORKDIR /app
 # enable camera
 CMD ["modprobe" "v4l2_common"]
 
-# run robot and api
-CMD ["bash","start.sh"]
+# run robot
+CMD ["python","robot.py"]
