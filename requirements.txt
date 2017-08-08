@@ -3,4 +3,3 @@ RPLCD
 Flask
 picamera
 hcsr04sensor
-talkey

@@ -1,6 +1,4 @@
-import talkey
-
-tts = talkey.Talkey()
+from espeak import espeak
 
 def talk(text):
-    tts.say(text)
+    espeak.synth(text)

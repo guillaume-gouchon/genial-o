@@ -13,7 +13,7 @@ RUN pip install -r /requirements.txt
 RUN apt-get update && apt-get install python-smbus
 
 # install text-to-speech library
-RUN sudo apt-get install espeak
+RUN apt-get install espeak python-espeak
 
 # copy sources
 COPY . /app
