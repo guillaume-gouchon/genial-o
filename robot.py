@@ -19,7 +19,7 @@ def main():
     i = 0
     while True:
         display.print_text("        {}".format(i), 4)
-        i++
+        i+=1
         sleep(1)
 
 
