@@ -21,7 +21,7 @@ def get_front_distance():
 def _get_distance(sensor, name):
     distance = sensor.get_distance()
     print(name, "distance =", distance)
-    return metric_distance
+    return distance
 
 def get_back_distance():
     return _get_distance(back_sensor, "back")

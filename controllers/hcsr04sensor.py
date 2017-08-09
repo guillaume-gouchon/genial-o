@@ -4,7 +4,7 @@ import time
 
 class HCSR04(object):
 
-    TIMEOUT = 5 # in number of iterations
+    TIMEOUT = 10000 # in number of iterations
 
     def __init__(self, trigger_pin, echo_pin):
         GPIO.setmode(GPIO.BCM)

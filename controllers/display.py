@@ -5,6 +5,18 @@ LCD_PORT_EXPANDER = "PCF8574"
 LCD_DISPLAY_ADDRESS = 0x3f
 lcd = CharLCD(LCD_PORT_EXPANDER, LCD_DISPLAY_ADDRESS)
 
+# create degree character
+degree = (
+    0b00111,
+    0b00101,
+    0b00111,
+    0b00000,
+    0b00000,
+    0b00000,
+    0b00000,
+    0b00000,
+)
+lcd.create_char(1, degree)
 
 def set_left_led(enabled):
     print("set_left_led", enabled)

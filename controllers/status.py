@@ -49,22 +49,22 @@ class CheckHardware(Thread):
 
     def run(self):
         while True:
-            cpu_temperature = os.popen('vcgencmd measure_temp').readline().replace("temp=","").replace("'C\n","")
+            # get CPU temperature
+            cpu_temperature = int(float(os.popen('vcgencmd measure_temp').readline().replace("temp=","").replace("'C\n","")))
             print("temperature= {}C".format(cpu_temperature))
 
+            # get RAM usage
             p = os.popen('free')
-            i = 0
-            while True:
-                i += 1
+            for i in range(0, 2):
                 line = p.readline()
-                if i == 2:
-                    ram = line.split()[1:4]
-                    used_ram = int(100 * float(ram[1]) / float(ram[0]))
-                    print("ram usage= {}%".format(used_ram))
+            ram = line.split()[1:4]
+            used_ram = int(100 * float(ram[1]) / float(ram[0]))
+            print("ram usage= {}%".format(used_ram))
 
-            used_cpu = psutil.cpu_percent(interval=1)
+
+            # get CPU usage
+            used_cpu = int(psutil.cpu_percent(interval=1))
             print("cpu usage= {}%".format(used_cpu))
 
-            display.print_text("{}C - RAM {}% - CPU {}%".format(cpu_temperature, used_ram, used_cpu), 3)
-
+            display.print_text("{}\x01C RAM {}% CPU {}%".format(cpu_temperature, used_ram, used_cpu), 3)
             time.sleep(self.interval)
