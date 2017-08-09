@@ -14,10 +14,13 @@ def main():
     display.clear_text()
     display.set_left_led(0)
     display.set_right_led(0)
-    display.print_text("Hello, je suis GENIAL-O", 1)
+    display.print_text("Hello, I am GENIAL-O", 1)
 
     CheckInternet()
     CheckHardware()
+
+    while True:
+        time.sleep(10)
 
 if __name__ == "__main__":
     # start robot and server on different processes
