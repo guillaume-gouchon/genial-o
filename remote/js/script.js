@@ -6,9 +6,9 @@ $(document).ready(function () {
     $.get(API_URL + '/info', function (data) {
       console.log(data);
       if (data.status) {
-        $('.cpu-temperature').text(data.status[0]);
-        $('.cpu-usage').text(data.status[1]);
-        $('.ram-usage').text(data.status[2]);
+        $('.cpu-temperature').text(data.status[0] + '˚C');
+        $('.cpu-usage').text(data.status[1] + '%');
+        $('.ram-usage').text(data.status[2] + '%');
       }
     });
   }
@@ -16,35 +16,59 @@ $(document).ready(function () {
   function getSensorsInfo() {
     $.get(API_URL + '/detect', function (data) {
       console.log(data);
-      if (data.status) {
-        $('.cpu-temperature').text(data.status[0]);
-        $('.cpu-usage').text(data.status[1]);
-        $('.ram-usage').text(data.status[2]);
-      }
+      $('.front-sensor').text(Math.round(data.front) + ' cm');
+      $('.left-sensor').text(Math.round(data.left) + ' cm');
+      $('.right-sensor').text(Math.round(data.right) + ' cm');
+      $('.back-sensor').text(Math.round(data.back) + ' cm');
     });
   }
 
-  function talk() {
+  function getCamera() {
+    $('.camera').attr('src', API_URL + '/camera');
+  }
+
+  talk = function () {
     var text = $('#input-to-display').val();
     if (text && text.length) {
       $.post(API_URL + '/talk', {
         text: text,
       }, function (data) {
         console.log(data);
+        if (data == 'OK') {
+          Materialize.toast('DONE', 2000);
+        }
       });
     }
   }
 
-  function print() {
+  printOnScreen = function () {
     var text = $('#input-to-display').val();
     if (text && text.length) {
       $.post(API_URL + '/print', {
         text: text,
-        line: 1,
+        line: 2,
       }, function (data) {
         console.log(data);
+        if (data == 'OK') {
+          Materialize.toast('DONE', 2000);
+        }
       });
     }
+  }
+
+  move = function (direction) {
+    $.post(API_URL + '/move', {
+      direction: direction,
+      speed: 1,
+    }, function (data) {
+      console.log(data);
+    });
+  }
+
+  stop = function () {
+    $.post(API_URL + '/stop', function (data) {
+      console.log(data);
+    });
   }
 
   getInfo();
@@ -55,6 +79,11 @@ $(document).ready(function () {
   getSensorsInfo();
   setTimeout(function () {
     getSensorsInfo();
-  }, 10000);
+  }, 2000);
+
+  // getCamera();
+  // setTimeout(function () {
+  //   getCamera();
+  // }, 2000);
 
 });
