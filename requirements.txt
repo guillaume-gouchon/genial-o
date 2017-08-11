@@ -2,6 +2,5 @@ RRB3
 RPLCD
 Flask
 picamera
-hcsr04sensor
 psutil
 flask-cors
