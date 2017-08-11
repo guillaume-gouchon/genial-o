@@ -1,2 +1,2 @@
-modprobe bcm2835-v4l2 &
+modprobe v4l2_common &
 python robot.py

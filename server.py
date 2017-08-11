@@ -1,17 +1,26 @@
 from flask import Flask, send_file, jsonify, request
+from flask_cors import CORS
 
 import controllers.display as display
 import controllers.detect as detect
 import controllers.move as move
 import controllers.speak as speak
 import controllers.see as see
+import controllers.status as status
 
 app = Flask(__name__)
 app.use_reloader=False
+CORS(app)
 
 @app.route("/")
 def hello():
     return "Hello, je suis GENIAL-O"
+
+@app.route("/info")
+def get_information():
+    return jsonify(
+        status=status.get_information()
+    )
 
 @app.route("/detect")
 def get_distances():

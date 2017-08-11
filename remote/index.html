@@ -28,40 +28,78 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 
   <div class="row">
-    <div class="col s12">
-      <ul class="tabs">
-        <li class="tab col s4"><a class="active" href="#state"><i class="material-icons">insert_chart</i></a></li>
-        <li class="tab col s4"><a href="#move"><i class="material-icons">drive_eta</i></a></li>
-        <li class="tab col s4"><a href="#display"><i class="material-icons">chat_bubble</i></a></li>
-      </ul>
-    </div>
+    <ul class="tabs">
+      <li class="tab"><a class="active" href="#state"><i class="material-icons">insert_chart</i></a></li>
+      <li class="tab"><a href="#move"><i class="material-icons">drive_eta</i></a></li>
+      <li class="tab"><a href="#display"><i class="material-icons">chat_bubble</i></a></li>
+    </ul>
 
-    <div id="active" class="col s10 s-offset-1">
-
-    </div>
-
-    <div id="move" class="col s10 s-offset-1">
-    </div>
-
-    <div id="display" class="col s10 s-offset-1">
-      <br/>
-      <br/>
-      <div class="input-field">
-        <input class="input-to-display" type="text" />
+    <div class="col s10 offset-s1 container">
+      <div id="state" >
+        <table class="table striped bordered">
+          <tr>
+            <td>CPU Temperature</td>
+            <td class="cpu-temperature"></td>
+          </tr>
+          <tr>
+            <td>CPU usage</td>
+            <td class="cpu-usage"></td>
+          </tr>
+          <tr>
+            <td>RAM usage</td>
+            <td class="ram-usage"></td>
+          </tr>
+        </table>
       </div>
-      <br/>
-      <button class="waves-effect waves-light btn">DISPLAY</button>
-      <br/>
-      <button class="waves-effect waves-light btn">SPEAK</button>
+
+      <div id="move" class="row">
+
+        <img col="s12" alt="camera"/>
+
+        <table class="table striped centered bordered">
+          <tr>
+            <td><small>Left sensor</small></td>
+            <td><small>Front sensor<br/>(Back sensor)</small></td>
+            <td><small>Right sensor</small></td>
+          </tr>
+          <tr>
+            <td class="left-sensor"></td>
+            <td >
+              <div class="front-sensor"></div>
+              <div>(<span class="back-sensor"></span>)</div>
+            </td>
+            <td class="right-sensor"></td>
+          </tr>
+        </table>
+
+        <br/>
+
+        <button class="waves-effect waves-light btn-large col s12" onclick="forward()"><i class="material-icons">keyboard_arrow_up</i></button>
+        <button class="waves-effect waves-light btn-large col s4" onclick="turnLeft()"><i class="material-icons">keyboard_arrow_left</i></button>
+        <button class="waves-effect waves-light btn-large col s4" onclick="stop()"><i class="material-icons">stop</i></button>
+        <button class="waves-effect waves-light btn-large col s4" onclick="turnRight()"><i class="material-icons">keyboard_arrow_right</i></button>
+        <button class="waves-effect waves-light btn-large col s12" onclick="backward()"><i class="material-icons">keyboard_arrow_down</i></button>
+      </div>
+
+      <div id="display" class="row">
+        <div class="input-field col s12">
+          <input id="input-to-display" class="input-to-display" type="text" name="input" />
+          <label>text to speak / display</label>
+        </div>
+        <button class="waves-effect waves-light btn-large col s12" onclick="print()">DISPLAY ON SCREEN</button>
+        <button class="waves-effect waves-light btn-large col s12" onclick="talk()">SPEAK</button>
+      </div>
     </div>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
-  <script src="js/script.js"></script>
+  <script src="./js/script.js"></script>
 </body>
 </html>

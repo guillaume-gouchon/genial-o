@@ -4,3 +4,4 @@ Flask
 picamera
 hcsr04sensor
 psutil
+flask-cors

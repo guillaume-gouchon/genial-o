@@ -6,6 +6,30 @@ import time
 
 import display as display
 
+def get_information():
+    response = []
+
+    # get CPU temperature
+    cpu_temperature = int(float(os.popen('vcgencmd measure_temp').readline().replace("temp=","").replace("'C\n","")))
+    print("temperature= {}C".format(cpu_temperature))
+    response.append(cpu_temperature)
+
+    # get CPU usage
+    used_cpu = int(psutil.cpu_percent(interval=1))
+    print("cpu usage= {}%".format(used_cpu))
+    response.append(used_cpu)
+
+    # get RAM usage
+    p = os.popen('free')
+    for i in range(0, 2):
+        line = p.readline()
+    ram = line.split()[1:4]
+    used_ram = int(100 * float(ram[1]) / float(ram[0]))
+    print("ram usage= {}%".format(used_ram))
+    response.append(used_ram)
+
+    return response
+
 
 class CheckInternet(Thread):
 
@@ -49,22 +73,6 @@ class CheckHardware(Thread):
 
     def run(self):
         while True:
-            # get CPU temperature
-            cpu_temperature = int(float(os.popen('vcgencmd measure_temp').readline().replace("temp=","").replace("'C\n","")))
-            print("temperature= {}C".format(cpu_temperature))
-
-            # get RAM usage
-            p = os.popen('free')
-            for i in range(0, 2):
-                line = p.readline()
-            ram = line.split()[1:4]
-            used_ram = int(100 * float(ram[1]) / float(ram[0]))
-            print("ram usage= {}%".format(used_ram))
-
-
-            # get CPU usage
-            used_cpu = int(psutil.cpu_percent(interval=1))
-            print("cpu usage= {}%".format(used_cpu))
-
-            display.print_text("{}\x01C RAM {}% CPU {}%".format(cpu_temperature, used_ram, used_cpu), 3)
+            info = get_information()
+            display.print_text("{}\x01C CPU {}% RAM {}%".format(info[0], info[1], info[2]), 3)
             time.sleep(self.interval)
