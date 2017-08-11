@@ -31,8 +31,14 @@
     {
       "src": "/images/icons/windows-tile-310x310.png",
       "sizes": "320x240"
+    },
+    {
+      "src": "/images/icons/windows-tile-310x310.png",
+      "sizes": "1334x750"
     }
   ],
+  "lang": "en-US",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "background_color": "white"
 }
