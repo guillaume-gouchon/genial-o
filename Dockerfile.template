@@ -20,7 +20,7 @@ COPY . /app
 WORKDIR /app
 
 # enable camera
-CMD ["modprobe" "v4l2_common"]
+CMD ["bash" "/app/scripts/enable-camera.sh"]
 
 # run robot
 CMD ["python","robot.py"]

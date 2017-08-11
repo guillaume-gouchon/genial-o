@@ -20,7 +20,8 @@ def main():
     CheckHardware()
 
     while True:
-        time.sleep(10)
+        see.take_picture()
+        time.sleep(3)
 
 if __name__ == "__main__":
     # start robot and server on different processes

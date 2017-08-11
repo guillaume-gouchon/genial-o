@@ -4,8 +4,6 @@ import time
 
 class HCSR04(object):
 
-    TIMEOUT = 10000 # in number of iterations
-
     def __init__(self, trigger_pin, echo_pin):
         GPIO.setmode(GPIO.BCM)
 
@@ -20,16 +18,16 @@ class HCSR04(object):
         time.sleep(0.0001)
         GPIO.output(self.trigger_pin, False)
 
-    def _wait_for_echo(self, value, timeout):
-        count = TIMEOUT
+    def _wait_for_echo(self, value):
+        count = 10000
         while GPIO.input(self.echo_pin) != value and count > 0:
             count -= 1
 
     def get_distance(self):
         self._send_trigger_pulse()
-        # self._wait_for_echo(True)
+        self._wait_for_echo(True)
         start = time.time()
-        # self._wait_for_echo(False)
+        self._wait_for_echo(False)
         finish = time.time()
         pulse_len = finish - start
         distance_cm = pulse_len / 0.000058
