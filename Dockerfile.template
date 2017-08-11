@@ -10,7 +10,7 @@ COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
 # install missing library for RPLCD.i2c
-RUN apt-get update && apt-get install python-smbus
+RUN apt-get update && apt-get upgrade && apt-get install python-smbus
 
 # install text-to-speech library
 RUN apt-get install espeak
