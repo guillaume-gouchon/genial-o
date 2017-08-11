@@ -19,9 +19,5 @@ RUN apt-get install espeak
 COPY . /app
 WORKDIR /app
 
-# enable camera
-COPY config/boot-config.txt /boot
-RUN mv /boot/boot-config.txt /boot/config.txt
-
 # run robot
 CMD ["bash", "start.sh"]
