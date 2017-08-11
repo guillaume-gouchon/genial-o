@@ -21,7 +21,7 @@ WORKDIR /app
 
 # enable camera
 COPY config/boot-config.txt /boot
-RUN mv /boot/boot-config.txt config.txt
+RUN mv /boot/boot-config.txt /boot/config.txt
 
 # run robot
 CMD ["python","robot.py"]
