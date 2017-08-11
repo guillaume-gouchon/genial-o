@@ -22,6 +22,8 @@ WORKDIR /app
 # enable camera
 COPY config/boot-config.txt /boot
 RUN mv /boot/boot-config.txt /boot/config.txt
+RUN sed /boot/config.txt -i -e "s/^startx/#startx/"
+RUN sed /boot/config.txt -i -e "s/^fixup_file/#fixup_file/"
 
 # run robot
 CMD ["python","robot.py"]
