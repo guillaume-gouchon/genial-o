@@ -20,7 +20,7 @@ COPY . /app
 WORKDIR /app
 
 # enable camera
-COPY /app/config/boot-config.txt /boot
+COPY config/boot-config.txt /boot
 RUN mv /boot/boot-config.txt config.txt
 
 # run robot
