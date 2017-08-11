@@ -36,5 +36,6 @@
   "lang": "en-US",
   "display": "standalone",
   "orientation": "portrait",
+  "theme": "white",
   "background_color": "white"
 }
