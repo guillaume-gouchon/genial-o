@@ -25,13 +25,13 @@
       "sizes": "192x192",
       "type": "image/png",
       "density": 4.0
-    },
+    }
   ],
   "splash_screens": [
     {
       "src": "/images/icons/windows-tile-310x310.png",
       "sizes": "320x240"
-    },
+    }
   ],
   "display": "standalone",
   "orientation": "portrait"
