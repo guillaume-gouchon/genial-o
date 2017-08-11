@@ -24,5 +24,4 @@ COPY config/boot-config.txt /boot
 RUN mv /boot/boot-config.txt /boot/config.txt
 
 # run robot
-CMD ["modprobe", "bcm2835-v4l2"]
-CMD ["python","robot.py"]
+CMD ["bash", "start.sh"]
