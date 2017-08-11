@@ -57,9 +57,8 @@
           <tr>
             <td class="left-sensor"></td>
             <td>
-              <div class="front-sensor"></div>
-              <br>
-              <div>(<i class="back-sensor"></i>)</div>
+              <span class="front-sensor"></span>
+              (<i class="back-sensor"></i>)
             </td>
             <td class="right-sensor"></td>
           </tr>
@@ -76,14 +75,14 @@
 
       <div id="display" class="row">
         <div class="input-field col s12">
-          <input id="input-to-display" class="input-to-display" type="text" name="input">
+          <input id="input-to-display" class="input-to-display" type="text" name="textToDisplay">
           <label>text to speak / display</label>
         </div>
         <button class="waves-effect waves-light btn-large col s12" onclick="printOnScreen()">DISPLAY ON SCREEN</button>
         <button class="waves-effect waves-light btn-large col s12" onclick="talk()">SPEAK</button>
       </div>
 
-      <div id="state">
+      <div id="state" class="row">
         <table class="table striped bordered">
           <tr>
             <td>CPU Temperature</td>
