@@ -20,7 +20,8 @@ COPY . /app
 WORKDIR /app
 
 # enable camera
-CMD ["bash" "/app/scripts/enable-camera.sh"]
+COPY /app/config/boot-config.txt /boot
+RUN mv /boot/boot-config.txt config.txt
 
 # run robot
 CMD ["python","robot.py"]
