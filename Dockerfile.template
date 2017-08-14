@@ -18,6 +18,11 @@ RUN apt-get install espeak
 # update Raspberry firmwares
 RUN apt-get install rpi-update && rpi-update
 
+#install Tensorflow
+RUN wget https://github.com/samjabrahams/tensorflow-on-raspberry-pi/releases/download/v1.1.0/tensorflow-1.1.0-cp27-none-linux_armv7l.whl
+RUN pip install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
+RUN pip uninstall mock && pip install mock
+
 # copy sources
 COPY . /app
 WORKDIR /app
