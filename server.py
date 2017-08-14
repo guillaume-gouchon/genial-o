@@ -47,6 +47,7 @@ def get_camera_image():
 def print_text():
     text = request.form["text"]
     line = int(float(request.form["line"]))
+    display.clear_text()
     display.print_text(text, line)
     return "OK"
 
