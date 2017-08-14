@@ -2,6 +2,8 @@ $(document).ready(function () {
 
   var API_URL = 'https://fffc9d2160d9dc7a2e05df05317c0182.resindevice.io';
 
+  $('.camera').attr('src', API_URL + '/camera');
+
   function getInfo() {
     $.get(API_URL + '/info', function (data) {
       console.log(data);
@@ -77,7 +79,5 @@ $(document).ready(function () {
   setInterval(function () {
     getSensorsInfo();
   }, 5000);
-
-  $('.camera').attr('src', API_URL + '/camera');
 
 });
