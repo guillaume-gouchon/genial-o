@@ -77,11 +77,11 @@
 
         <br/>
 
-        <button class="waves-effect waves-light btn-large col s12" touchstart="move('forward')" onmousedown="move('forward')" onmouseup="stop()" touchend="stop()"><i class="material-icons">keyboard_arrow_up</i></button>
-        <button class="waves-effect waves-light btn-large col s4" touchstart="move('rotate_left')" onmousedown="move('rotate_left')" onmouseup="stop()" touchend="stop()"><i class="material-icons">keyboard_arrow_left</i></button>
+        <button id="forward-btn" class="waves-effect waves-light btn-large col s12" onmousedown="move('forward')" onmouseup="stop()"><i class="material-icons">keyboard_arrow_up</i></button>
+        <button id="rotate-left-btn" class="waves-effect waves-light btn-large col s4" onmousedown="move('rotate_left')" onmouseup="stop()"><i class="material-icons">keyboard_arrow_left</i></button>
         <button class="waves-effect waves-light btn-large col s4" onclick="stop()"><i class="material-icons">stop</i></button>
-        <button class="waves-effect waves-light btn-large col s4" touchstart="move('rotate_right')" onmousedown="move('rotate_right')" onmouseup="stop()" touchend="stop()"><i class="material-icons">keyboard_arrow_right</i></button>
-        <button class="waves-effect waves-light btn-large col s12" touchstart="move('backward')" onmousedown="move('backward')" onmouseup="stop()" touchend="stop()"><i class="material-icons">keyboard_arrow_down</i></button>
+        <button id="rotate-right-btn" class="waves-effect waves-light btn-large col s4" onmousedown="move('rotate_right')" onmouseup="stop()"><i class="material-icons">keyboard_arrow_right</i></button>
+        <button id="backward-btn" class="waves-effect waves-light btn-large col s12" onmousedown="move('backward')" onmouseup="stop()"><i class="material-icons">keyboard_arrow_down</i></button>
       </div>
 
       <div id="display" class="row">

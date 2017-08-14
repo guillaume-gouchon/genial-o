@@ -26,15 +26,15 @@ def stop():
     raspi_robot_board.set_motors(0, 0, 0, 0)
 
 def set_auto_pilot(is_auto_pilot):
-    print("set auto pilot", is_auto_pilot)
-    stop()
-    old_value = auto_pilot.value
+    if (auto_pilot.value != is_auto_pilot):
+        print("set auto pilot", is_auto_pilot)
+        stop()
 
-    with auto_pilot.get_lock():
-        auto_pilot.value = is_auto_pilot
+        with auto_pilot.get_lock():
+            auto_pilot.value = is_auto_pilot
 
-    if old_value == 0 and is_auto_pilot == 1:
-        start_auto_pilot()
+        if is_auto_pilot == 1:
+            start_auto_pilot()
 
 def start_auto_pilot():
     print("start auto pilot")

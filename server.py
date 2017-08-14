@@ -65,7 +65,7 @@ def set_auto_pilot():
 @app.route("/move", methods=["POST"])
 def make_move():
     move.set_auto_pilot(0)
-    speed=float(request.form["speed"])
+    speed = float(request.form["speed"])
     direction=request.form["direction"]
     if direction == "forward":
         move.go_forward(speed)

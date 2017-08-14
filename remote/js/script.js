@@ -88,4 +88,18 @@ $(document).ready(function () {
     getSensorsInfo();
   }, 5000);
 
+  initTouchEvents = function (id, direction) {
+    var el = document.getElementById(id);
+    el.addEventListener("touchstart", function () {
+      move(direction);
+    }, false);
+    el.addEventListener("touchend", function () {
+      stop();
+    }, false);
+  }
+  initTouchEvents('forward-btn', 'forward');
+  initTouchEvents('rotate-left-btn', 'rotate_left');
+  initTouchEvents('rotate-right-btn', 'rotate_right');
+  initTouchEvents('backward-btn', 'backward');
+
 });
