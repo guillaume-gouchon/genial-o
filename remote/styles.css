@@ -33,6 +33,10 @@ html {
   margin-bottom: 1rem;
 }
 
+#move .row {
+  margin-bottom: 0;
+}
+
 .auto-pilot-form {
   position: absolute;
   top: 19.5rem;
