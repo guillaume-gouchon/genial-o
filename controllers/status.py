@@ -33,7 +33,7 @@ def get_information():
 
 class CheckInternet(Thread):
 
-    def __init__(self, interval=10):
+    def __init__(self, interval=30):
         Thread.__init__(self)
 
         self.interval = interval
@@ -62,7 +62,7 @@ class CheckInternet(Thread):
 
 class CheckHardware(Thread):
 
-    def __init__(self, interval=10):
+    def __init__(self, interval=30):
         Thread.__init__(self)
 
         self.interval = interval
