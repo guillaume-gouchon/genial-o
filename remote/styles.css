@@ -37,6 +37,10 @@ html {
   margin-bottom: 0;
 }
 
+.switch {
+  user-select: none;
+}
+
 .auto-pilot-form {
   position: absolute;
   top: 19.5rem;
