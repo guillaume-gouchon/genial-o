@@ -21,16 +21,16 @@ def hello():
 @app.route("/info")
 def get_information():
     return jsonify(
-        status=status.get_information()
+        status = status.get_information()
     )
 
 @app.route("/detect")
 def get_distances():
     return jsonify(
-        front=detect.get_front_distance(),
-        left=detect.get_left_distance(),
-        right=detect.get_right_distance(),
-        back=detect.get_back_distance(),
+        front = detect.get_front_distance(),
+        left = detect.get_left_distance(),
+        right = detect.get_right_distance(),
+        back = detect.get_back_distance(),
     )
 
 def gen(camera):
@@ -45,25 +45,26 @@ def get_camera_image():
 
 @app.route("/print", methods=["POST"])
 def print_text():
-    text=request.form["text"]
-    line=int(float(request.form["line"]))
+    text = request.form["text"]
+    line = int(float(request.form["line"]))
     display.print_text(text, line)
     return "OK"
 
 @app.route("/talk", methods=["POST"])
 def make_talk():
-    text=request.form["text"]
+    text = request.form["text"]
     speak.talk(text)
     return "OK"
 
-@app.route("/pilot", methods=["PUT"])
+@app.route("/pilot", methods=["POST"])
 def set_auto_pilot():
-    auto_pilot=request.form["auto_pilot"]
+    auto_pilot = int(float(request.form["auto_pilot"]))
     move.set_auto_pilot(auto_pilot)
     return "OK"
 
 @app.route("/move", methods=["POST"])
 def make_move():
+    move.set_auto_pilot(0)
     speed=float(request.form["speed"])
     direction=request.form["direction"]
     if direction == "forward":
@@ -78,5 +79,6 @@ def make_move():
 
 @app.route("/stop", methods=["POST"])
 def stop():
+    move.set_auto_pilot(0)
     move.stop()
     return "OK"

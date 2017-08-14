@@ -36,7 +36,7 @@ $(document).ready(function () {
         }
       });
     }
-  }
+  };
 
   printOnScreen = function () {
     var text = $('#input-to-display').val();
@@ -51,22 +51,32 @@ $(document).ready(function () {
         }
       });
     }
-  }
+  };
 
   move = function (direction) {
+    $('#auto-pilot').prop('checked', false);
     $.post(API_URL + '/move', {
       direction: direction,
       speed: 1,
     }, function (data) {
       console.log(data);
     });
-  }
+  };
 
   stop = function () {
-    $.post(API_URL + '/stop', function (data) {
+    $('#auto-pilot').prop('checked', false);
+    $.post(API_URL + '/stop', {}, function (data) {
       console.log(data);
     });
-  }
+  };
+
+  setAutoPilot = function () {
+    $.post(API_URL + '/pilot', {
+      auto_pilot: $('#auto-pilot').prop('checked') ? 1 : 0
+    }, function (data) {
+      console.log(data);
+    });
+  };
 
   getInfo();
   setInterval(function () {

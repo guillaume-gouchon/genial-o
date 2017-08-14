@@ -32,3 +32,9 @@ html {
   width: 100%;
   margin-bottom: 1rem;
 }
+
+.auto-pilot-form {
+  position: absolute;
+  top: 19.5rem;
+  right: 4.0rem;
+}

@@ -1,4 +1,4 @@
-from time import *
+import time
 from multiprocessing import Process, Value
 
 import server as server
@@ -18,6 +18,8 @@ def main():
 
     CheckInternet()
     CheckHardware()
+
+    move.start_auto_pilot()
 
     while True:
         time.sleep(5)

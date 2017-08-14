@@ -48,6 +48,17 @@
       <div id="move" class="row">
         <img class="camera" col="s12" src="https://fffc9d2160d9dc7a2e05df05317c0182.resindevice.io/camera">
 
+        <form class="auto-pilot-form">
+          <div class="switch center">
+           <label>
+             Manual
+             <input id="auto-pilot" type="checkbox" name="auto-pilot" checked="checked" onchange="setAutoPilot()">
+             <span class="lever"></span>
+             Auto-pilot
+           </label>
+         </div>
+        </form>
+
         <table class="table striped centered bordered">
           <tr>
             <td><small>Left</small></td>
@@ -64,7 +75,7 @@
           </tr>
         </table>
 
-        <br>
+        <br/>
 
         <button class="waves-effect waves-light btn-large col s12" onmousedown="move(&apos;forward&apos;)" onmouseup="stop()"><i class="material-icons">keyboard_arrow_up</i></button>
         <button class="waves-effect waves-light btn-large col s4" onmousedown="move(&apos;rotate_left&apos;)" onmouseup="stop()"><i class="material-icons">keyboard_arrow_left</i></button>
