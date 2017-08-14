@@ -43,7 +43,7 @@ $(document).ready(function () {
     if (text && text.length) {
       $.post(API_URL + '/print', {
         text: text,
-        line: 2,
+        line: 1,
       }, function (data) {
         console.log(data);
         if (data == 'OK') {
