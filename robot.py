@@ -20,7 +20,6 @@ def main():
     CheckHardware()
 
     while True:
-        see.take_picture()
         time.sleep(5)
 
 if __name__ == "__main__":

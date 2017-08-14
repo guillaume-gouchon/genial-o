@@ -76,7 +76,7 @@ $(document).ready(function () {
   getSensorsInfo();
   setInterval(function () {
     getSensorsInfo();
-  }, 2000);
+  }, 5000);
 
   $('.camera').attr('src', API_URL + '/camera');
 
