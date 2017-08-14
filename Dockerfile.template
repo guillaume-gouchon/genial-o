@@ -18,17 +18,14 @@ RUN apt-get install espeak
 # update Raspberry firmwares
 RUN apt-get install rpi-update && rpi-update
 
-# install Tensorflow
-RUN apt-get install python-dev
-ADD ./libs/tensorflow-1.1.0-cp27-none-linux_armv7l.whl .
-RUN pip install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
-RUN pip uninstall mock
-RUN pip install mock
-
 # copy sources
 COPY . /app
 WORKDIR /app
 
+# install Tensorflow
+RUN apt-get install python-dev
+CMD ["pip", "install libs/tensorflow-1.1.0-cp27-none-linux_armv7l.whl"]
+CMD ["pip", "uninstall mock && pip install mock"]
 
 # run robot
 CMD ["bash", "start.sh"]
