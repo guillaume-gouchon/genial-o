@@ -1,4 +1,4 @@
-from flask import Flask, send_file, jsonify, request
+from flask import Flask, send_file, jsonify, request, Response
 from flask_cors import CORS
 
 import controllers.display as display
@@ -8,8 +8,10 @@ import controllers.speak as speak
 import controllers.see as see
 import controllers.status as status
 
+from controllers.camera_pi import Camera
+
 app = Flask(__name__)
-app.use_reloader=False
+app.use_reloader = False
 CORS(app)
 
 @app.route("/")
@@ -31,9 +33,15 @@ def get_distances():
         back=detect.get_back_distance(),
     )
 
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 @app.route("/camera")
 def get_camera_image():
-    return send_file(see.LATEST_PIC_PATH, mimetype="image/jpg")
+    return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/print", methods=["POST"])
 def print_text():

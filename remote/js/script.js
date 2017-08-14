@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  var API_URL = 'https://fffc9d2160d9dc7a2e05df05317c0182.resindevice.io/';
+  var API_URL = 'https://fffc9d2160d9dc7a2e05df05317c0182.resindevice.io';
 
   function getInfo() {
     $.get(API_URL + '/info', function (data) {
@@ -23,9 +23,6 @@ $(document).ready(function () {
     });
   }
 
-  function getCamera() {
-    $('.camera').attr('src', API_URL + '/camera?t=' + new Date().getTime());
-  }
 
   talk = function () {
     var text = $('#input-to-display').val();
@@ -72,18 +69,15 @@ $(document).ready(function () {
   }
 
   getInfo();
-  setTimeout(function () {
+  setInterval(function () {
     getInfo();
   }, 10000);
 
   getSensorsInfo();
-  setTimeout(function () {
+  setInterval(function () {
     getSensorsInfo();
   }, 2000);
 
-  getCamera();
-  setTimeout(function () {
-    getCamera();
-  }, 2000);
+  $('.camera').attr('src', API_URL + '/camera');
 
 });

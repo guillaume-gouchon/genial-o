@@ -21,7 +21,7 @@ def main():
 
     while True:
         see.take_picture()
-        time.sleep(3)
+        time.sleep(5)
 
 if __name__ == "__main__":
     # start robot and server on different processes
