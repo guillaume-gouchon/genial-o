@@ -24,7 +24,7 @@ $(document).ready(function () {
   }
 
   function getCamera() {
-    $('.camera').attr('src', API_URL + '/camera');
+    $('.camera').attr('src', API_URL + '/camera?t=' + new Date().getTime());
   }
 
   talk = function () {
@@ -81,9 +81,9 @@ $(document).ready(function () {
     getSensorsInfo();
   }, 2000);
 
-  // getCamera();
-  // setTimeout(function () {
-  //   getCamera();
-  // }, 2000);
+  getCamera();
+  setTimeout(function () {
+    getCamera();
+  }, 2000);
 
 });
