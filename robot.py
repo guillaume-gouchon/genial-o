@@ -19,8 +19,6 @@ def main():
     CheckInternet()
     CheckHardware()
 
-    move.start_auto_pilot()
-
     while True:
         time.sleep(5)
 
