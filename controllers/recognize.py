@@ -5,4 +5,4 @@ def guess():
     see.take_picture()
     print("guessing...")
     # TODO
-    display.print_text("I guess it is = ", 1)
+    display.print_text("I guess it is a ", 1)

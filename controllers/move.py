@@ -63,7 +63,7 @@ def start_auto_pilot():
         else:
             rotate_right()
 
-        time.sleep(0.5)
+        time.sleep(2)
 
         # start again
         start_auto_pilot()
