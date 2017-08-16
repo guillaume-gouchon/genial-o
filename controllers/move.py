@@ -40,20 +40,22 @@ def set_auto_pilot(is_auto_pilot):
 def start_auto_pilot():
     print("start auto pilot")
     go_forward()
-    while auto_pilot.value == 1 and detect.get_front_distance() > 10:
+    while auto_pilot.value == 1 and detect.get_front_distance() > 25:
         print("auto pilot ON: going forward...")
-        time.sleep(1)
+        time.sleep(0.25)
+
+    stop()
 
     if auto_pilot.value == 0:
         print("stop auto pilot")
     else:
         # GENIAL-O found an obstacle
         print("found obstacle, what is it?")
-        recognize.guess()
+        # recognize.guess()
 
         left = detect.get_left_distance()
         right = detect.get_right_distance()
-        if left < 10 and right < 10:
+        if left < 25 and right < 25:
             stop()
             go_backward()
             time.sleep(5)
