@@ -37,12 +37,14 @@ def set_auto_pilot(is_auto_pilot):
         if is_auto_pilot == 1:
             start_auto_pilot()
 
+DISTANCE_THRESHOLD = 35 # in cm
+
 def start_auto_pilot():
     print("start auto pilot")
     go_forward()
-    while auto_pilot.value == 1 and detect.get_front_distance() > 25:
+    while auto_pilot.value == 1 and detect.get_front_distance() > DISTANCE_THRESHOLD:
         print("auto pilot ON: going forward...")
-        time.sleep(0.25)
+        time.sleep(0.2)
 
     stop()
 
@@ -55,17 +57,16 @@ def start_auto_pilot():
 
         left = detect.get_left_distance()
         right = detect.get_right_distance()
-        if left < 25 and right < 25:
-            stop()
+        if left < DISTANCE_THRESHOLD and right < DISTANCE_THRESHOLD:
             go_backward()
-            time.sleep(5)
+            time.sleep(3)
             rotate_left()
         elif detect.get_left_distance() > detect.get_right_distance():
             rotate_left()
         else:
             rotate_right()
 
-        time.sleep(2)
+        time.sleep(1)
 
         # start again
         start_auto_pilot()
