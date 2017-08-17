@@ -1,27 +1,8 @@
-FROM resin/rpi-raspbian
+FROM resin/raspberrypi3-python
 
 # switch on systemd init system in container
 ENV INITSYSTEM on
 ENV READTHEDOCS True
-
-# install missing library for Tensorflow
-RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recommends \
-        build-essential \
-        curl \
-        libfreetype6-dev \
-        libpng12-dev \
-        libzmq3-dev \
-        pkg-config \
-        python \
-        python-dev \
-        python-numpy \
-        python-scipy \
-        rsync \
-        wget \
-        unzip
-RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
-        python get-pip.py && \
-        rm get-pip.py
 
 # pip install python deps from requirements.txt
 # for caching until requirements.txt changes
@@ -29,7 +10,7 @@ COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
 # install missing library for RPLCD.i2c
-RUN apt-get install python-smbus
+RUN apt-get update && apt-get upgrade && apt-get install python-smbus
 
 # install text-to-speech library
 RUN apt-get install espeak
@@ -42,15 +23,11 @@ COPY . /app
 WORKDIR /app
 
 # install Tensorflow
-RUN wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
-RUN mkdir /app/imagenet && mv inception-2015-12-05.tgz /app/imagenet/
-ADD libs/tensorflow-0.10.0-cp27-none-linux_armv7l.whl .
-RUN pip install tensorflow-0.10.0-cp27-none-linux_armv7l.whl
-RUN pip uninstall mock
-RUN pip install mock
-
-# clean up
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get install python-dev
+RUN wget ‐‐directory-prefix=/tmp/imagenet http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
+CMD ["pip", "install libs/tensorflow-1.1.0-cp27-none-linux_armv7l.whl"]
+CMD ["pip", "uninstall mock"]
+CMD ["pip", "install mock"]
 
 # run robot
 CMD ["bash", "start.sh"]
