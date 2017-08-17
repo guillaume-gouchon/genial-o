@@ -11,6 +11,7 @@ except ImportError:
 
 class CameraEvent(object):
 
+    global interrupt
     interrupt = False
 
     """An Event-like class that signals all active clients when a new frame is
@@ -100,7 +101,7 @@ class BaseCamera(object):
             # the last 10 seconds then stop the thread
             if time.time() - BaseCamera.last_access > 10 or interrupt:
                 frames_iterator.close()
-                if self.interrupt:
+                if interrupt:
                     print ('Stopping camera thread because we need the camera')
                 else:
                     print('Stopping camera thread due to inactivity.')

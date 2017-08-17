@@ -6,10 +6,12 @@ CAMERA_WARM_UP = 2 # in seconds
 LATEST_PIC_PATH = "/data/latest_picture.jpg"
 
 def take_picture():
-    print('take picture')
-    if 'pi_camera' in locals():
+    print('take_picture')
+
+    if 'pi_camera' in globals():
+        print('stop camera thread as we need it')
         pi_camera.stop()
-        time.sleep(0.5)
+        time.sleep(3)
 
     with picamera.PiCamera() as camera:
         camera.rotation = 180
@@ -21,8 +23,10 @@ def take_picture():
         generate_frames()
 
 def generate_frames():
+    global pi_camera
     pi_camera = Camera()
     while True:
         frame = pi_camera.get_frame()
+        print(frame)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
