@@ -4,11 +4,6 @@ FROM resin/rpi-raspbian
 ENV INITSYSTEM on
 ENV READTHEDOCS True
 
-# pip install python deps from requirements.txt
-# for caching until requirements.txt changes
-COPY ./requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
-
 # install missing library for Tensorflow
 RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recommends \
         build-essential \
@@ -26,6 +21,11 @@ RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recomme
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
         python get-pip.py && \
         rm get-pip.py
+
+# pip install python deps from requirements.txt
+# for caching until requirements.txt changes
+COPY ./requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt
 
 # install missing library for RPLCD.i2c
 RUN apt-get install python-smbus
