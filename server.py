@@ -8,8 +8,6 @@ import controllers.speak as speak
 import controllers.see as see
 import controllers.status as status
 
-from controllers.camera_pi import Camera
-
 app = Flask(__name__)
 app.use_reloader = False
 CORS(app)
@@ -33,15 +31,9 @@ def get_distances():
         back = detect.get_back_distance(),
     )
 
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
 @app.route("/camera")
 def get_camera_image():
-    return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(see.generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/print", methods=["POST"])
 def print_text():

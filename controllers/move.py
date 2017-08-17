@@ -53,7 +53,7 @@ def start_auto_pilot():
     else:
         # GENIAL-O found an obstacle
         print("found obstacle, what is it?")
-        # recognize.guess()
+        recognize.guess()
 
         left = detect.get_left_distance()
         right = detect.get_right_distance()
