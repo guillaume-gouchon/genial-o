@@ -9,9 +9,9 @@ def take_picture():
     print('take_picture')
 
     if 'pi_camera' in globals():
-        print('stop camera thread as we need it')
-        pi_camera.stop()
-        time.sleep(3)
+        frame = pi_camera.get_frame()
+        print(frame)
+
 
     with picamera.PiCamera() as camera:
         camera.rotation = 180
@@ -20,7 +20,6 @@ def take_picture():
         time.sleep(CAMERA_WARM_UP)
         camera.capture(LATEST_PIC_PATH)
         print('picture taken')
-        generate_frames()
 
 def generate_frames():
     global pi_camera
