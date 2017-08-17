@@ -142,7 +142,6 @@ def run_inference_on_image(image):
 
   # Creates graph from saved GraphDef.
   create_graph()
-  print('graph created')
 
   with tf.Session() as sess:
     # Some useful tensors:
