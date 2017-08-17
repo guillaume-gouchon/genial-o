@@ -2,6 +2,18 @@ $(document).ready(function () {
 
   var API_URL = 'https://fffc9d2160d9dc7a2e05df05317c0182.resindevice.io';
 
+  var loading = false;
+
+  function showLoading() {
+    loading = true;
+    $('.loading').removeClass('hide');
+  }
+
+  function hideLoading() {
+    loading = false;
+    $('.loading').addClass('hide');
+  }
+
   function getInfo() {
     $.get(API_URL + '/info', function (data) {
       console.log(data);
@@ -23,13 +35,25 @@ $(document).ready(function () {
     });
   }
 
+  guess = function () {
+    if (!loading) {
+      showLoading();
+      $.get(API_URL + '/guess', function (data) {
+        hideLoading();
+        console.log(data);
+        Materialize.toast(data.guess, 2000);
+      });
+    }
+  };
 
   talk = function () {
     var text = $('#input-to-display').val();
-    if (text && text.length) {
+    if (text && text.length && !loading) {
+      showLoading();
       $.post(API_URL + '/talk', {
         text: text,
       }, function (data) {
+        hideLoading();
         console.log(data);
         if (data == 'OK') {
           Materialize.toast('DONE', 2000);
@@ -40,11 +64,13 @@ $(document).ready(function () {
 
   printOnScreen = function () {
     var text = $('#input-to-display').val();
-    if (text && text.length) {
+    if (text && text.length && !loading) {
+      showLoading();
       $.post(API_URL + '/print', {
         text: text,
         line: 1,
       }, function (data) {
+        hideLoading();
         console.log(data);
         if (data == 'OK') {
           Materialize.toast('DONE', 2000);

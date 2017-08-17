@@ -7,6 +7,7 @@ import controllers.move as move
 import controllers.speak as speak
 import controllers.see as see
 import controllers.status as status
+import controllers.recognize as recognize
 
 app = Flask(__name__)
 app.use_reloader = False
@@ -20,6 +21,12 @@ def hello():
 def get_information():
     return jsonify(
         status = status.get_information()
+    )
+
+@app.route("/guess")
+def guess():
+    return jsonify(
+        guess = recognize.guess(),
     )
 
 @app.route("/detect")
