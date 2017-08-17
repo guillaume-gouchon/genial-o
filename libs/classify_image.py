@@ -142,6 +142,7 @@ def run_inference_on_image(image):
 
   # Creates graph from saved GraphDef.
   create_graph()
+  print('graph created')
 
   with tf.Session() as sess:
     # Some useful tensors:
@@ -204,7 +205,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--model_dir',
       type=str,
-      default='/app/imagenet',
+      default='/tmp/imagenet',
       help="""\
       Path to classify_image_graph_def.pb,
       imagenet_synset_to_human_label_map.txt, and
