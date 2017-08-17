@@ -26,8 +26,8 @@ WORKDIR /app
 RUN apt-get install python-dev
 RUN wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 RUN mkdir /app/imagenet && mv inception-2015-12-05.tgz /app/imagenet/
-ADD libs/tensorflow-0.10.0-cp27-none-linux_armv7l.whl .
-RUN pip install tensorflow-0.10.0-cp27-none-linux_armv7l.whl
+ADD libs/tensorflow-1.1.0-cp27-none-linux_armv7l.whl .
+RUN pip2 install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 RUN pip uninstall mock
 RUN pip install mock
 
