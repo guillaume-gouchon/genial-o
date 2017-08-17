@@ -4,3 +4,4 @@ Flask
 picamera
 psutil
 flask-cors
+numpy
