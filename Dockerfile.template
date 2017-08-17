@@ -17,6 +17,7 @@ RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recomme
         python-numpy \
         python-scipy \
         rsync \
+        wget \
         unzip
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
         python get-pip.py && \
