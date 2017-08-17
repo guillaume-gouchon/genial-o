@@ -9,9 +9,8 @@ ENV READTHEDOCS True
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
-# install missing library for RPLCD.i2c and Tensorflow
+# install missing library for Tensorflow
 RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recommends \
-        python-smbus \
         build-essential \
         curl \
         libfreetype6-dev \
@@ -24,6 +23,20 @@ RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recomme
         python-scipy \
         rsync \
         unzip
+
+RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
+        python get-pip.py && \
+        rm get-pip.py
+
+RUN pip --no-cache-dir install \
+        ipykernel \
+        jupyter \
+        matplotlib && \
+        python -m ipykernel.kernelspec
+
+# install missing library for RPLCD.i2c
+RUN apt-get install python-smbus
+
 # install text-to-speech library
 RUN apt-get install espeak
 
