@@ -23,14 +23,11 @@ RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recomme
         python-scipy \
         rsync \
         unzip
-
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
         python get-pip.py && \
         rm get-pip.py
-
 RUN pip --no-cache-dir install \
         ipykernel \
-        jupyter \
         matplotlib && \
         python -m ipykernel.kernelspec
 
@@ -43,20 +40,20 @@ RUN apt-get install espeak
 # update Raspberry firmwares
 RUN apt-get install rpi-update && rpi-update
 
-RUN  apt-get clean && \
-        rm -rf /var/lib/apt/lists/*
-
-# copy sources
-COPY . /app
-WORKDIR /app
-
 # install Tensorflow
 RUN wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 RUN mkdir /app/imagenet && mv inception-2015-12-05.tgz /app/imagenet/
 ADD libs/tensorflow-1.1.0-cp27-none-linux_armv7l.whl .
-RUN pip install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
+RUN pip2 install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 RUN pip uninstall mock
 RUN pip install mock
+
+# clean up
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# copy sources
+COPY . /app
+WORKDIR /app
 
 # run robot
 CMD ["bash", "start.sh"]
