@@ -9,8 +9,23 @@ ENV READTHEDOCS True
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
-# install missing library for RPLCD.i2c
-RUN apt-get update && apt-get upgrade && apt-get install python-smbus
+# install missing library for RPLCD.i2c and Tensorflow
+RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recommends \
+        python-smbus \
+        build-essential \
+        curl \
+        libfreetype6-dev \
+        libpng12-dev \
+        libzmq3-dev \
+        pkg-config \
+        python \
+        python-dev \
+        python-numpy \
+        python-scipy \
+        rsync \
+        unzip
+RUN  apt-get clean && \
+rm -rf /var/lib/apt/lists/*
 
 # install text-to-speech library
 RUN apt-get install espeak
@@ -26,8 +41,8 @@ WORKDIR /app
 RUN apt-get install python-pip python-dev
 RUN wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 RUN mkdir /app/imagenet && mv inception-2015-12-05.tgz /app/imagenet/
-ADD libs/tensorflow-0.10.0-cp27-none-linux_armv7l.whl .
-RUN pip install tensorflow-0.10.0-cp27-none-linux_armv7l.whl
+ADD libs/tensorflow-1.1.0-cp27-none-linux_armv7l.whl .
+RUN pip install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 RUN pip uninstall mock
 RUN pip install mock
 
