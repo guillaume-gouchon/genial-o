@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 
-
 class HCSR04(object):
 
     def __init__(self, trigger_pin, echo_pin):

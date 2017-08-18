@@ -11,12 +11,10 @@ def get_information():
 
     # get CPU temperature
     cpu_temperature = int(float(os.popen('vcgencmd measure_temp').readline().replace("temp=","").replace("'C\n","")))
-    # print("temperature= {}C".format(cpu_temperature))
     response.append(cpu_temperature)
 
     # get CPU usage
     used_cpu = int(psutil.cpu_percent(interval=1))
-    # print("cpu usage= {}%".format(used_cpu))
     response.append(used_cpu)
 
     # get RAM usage
@@ -25,7 +23,6 @@ def get_information():
         line = p.readline()
     ram = line.split()[1:4]
     used_ram = int(100 * float(ram[1]) / float(ram[0]))
-    # print("ram usage= {}%".format(used_ram))
     response.append(used_ram)
 
     return response
@@ -53,7 +50,6 @@ class CheckInternet(Thread):
                     display.print_text("NO INTERNET", 4)
             else:
                 if not self.is_connected:
-                    # print("Connected to Internet")
                     self.is_connected = True
                     display.print_text("ONLINE", 4)
 

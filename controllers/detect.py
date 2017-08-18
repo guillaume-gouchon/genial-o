@@ -15,12 +15,10 @@ right_sensor = HCSR04(RIGHT_SENSOR_TRIGGER_PIN, RIGHT_SENSOR_ECHO_PIN)
 
 def get_front_distance():
     distance = raspi_robot_board.get_distance()
-    # print("front distance=", distance)
     return distance
 
 def _get_distance(sensor, name):
     distance = sensor.get_distance()
-    # print(name, "distance =", distance)
     return distance
 
 def get_back_distance():
