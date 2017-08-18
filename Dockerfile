@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         espeak \
         rsync \
         rpi-update \
+        wget \
         unzip
 
 RUN  apt-get clean && \
