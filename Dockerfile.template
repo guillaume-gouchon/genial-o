@@ -24,7 +24,7 @@ WORKDIR /app
 
 # install Tensorflow
 RUN apt-get install python-dev
-RUN cd /data && wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
+RUN mkdir /data && cd /data && wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 
 # run robot
 CMD ["bash", "start.sh"]

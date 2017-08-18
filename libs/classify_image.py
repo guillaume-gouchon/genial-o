@@ -125,6 +125,7 @@ def create_graph():
     graph_def = tf.GraphDef()
     graph_def.ParseFromString(f.read())
     _ = tf.import_graph_def(graph_def, name='')
+    print ("graph created")
 
 
 def run_inference_on_image(image):
@@ -144,6 +145,8 @@ def run_inference_on_image(image):
   create_graph()
 
   with tf.Session() as sess:
+    print ("session created")
+
     # Some useful tensors:
     # 'softmax:0': A tensor containing the normalized prediction across
     #   1000 labels.
@@ -156,6 +159,7 @@ def run_inference_on_image(image):
     predictions = sess.run(softmax_tensor,
                            {'DecodeJpeg/contents:0': image_data})
     predictions = np.squeeze(predictions)
+    print ("predictions ready")
 
     # Creates node ID --> English string lookup.
     node_lookup = NodeLookup()
