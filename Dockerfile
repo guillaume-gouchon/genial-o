@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-dev \
         python-numpy \
         python-scipy \
-        python-smbus \ # install missing library for RPLCD.i2c
+        python-smbus \
         espeak \
         rsync \
         rpi-update \
@@ -40,7 +40,6 @@ RUN cd libs/ && wget http://download.tensorflow.org/models/image/imagenet/incept
 # for caching until requirements.txt changes
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
-
 
 # update Raspberry firmwares
 RUN rpi-update
