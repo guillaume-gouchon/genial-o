@@ -33,7 +33,7 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
 RUN wget https://github.com/samjabrahams/tensorflow-on-raspberry-pi/releases/download/v1.1.0/tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 # RUN pip2 install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 RUN pip install mock
-RUN cd libs/ && wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
+RUN cd /app/libs/ && wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 
 # pip install python deps from requirements.txt
 # for caching until requirements.txt changes
@@ -46,8 +46,6 @@ RUN rpi-update
 # copy sources
 COPY . /app
 WORKDIR /app
-
-
 
 # run robot
 CMD ["bash", "start.sh"]
