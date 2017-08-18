@@ -178,7 +178,6 @@ def maybe_download_and_extract():
     os.makedirs(dest_directory)
   filename = DATA_URL.split('/')[-1]
   filepath = os.path.join(dest_directory, filename)
-  print(filepath)
   if not os.path.exists(filepath):
     def _progress(count, block_size, total_size):
       sys.stdout.write('\r>> Downloading %s %.1f%%' % (
