@@ -31,7 +31,6 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
 
 # install Tensorflow
 RUN wget https://github.com/samjabrahams/tensorflow-on-raspberry-pi/releases/download/v1.1.0/tensorflow-1.1.0-cp27-none-linux_armv7l.whl
-ADD tensorflow-1.1.0-cp27-none-linux_armv7l.whl .
 RUN pip install tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 RUN pip uninstall mock
 RUN pip install mock
