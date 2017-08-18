@@ -24,11 +24,7 @@ WORKDIR /app
 
 # install Tensorflow
 RUN apt-get install python-dev
-RUN mkdir -p /app/imagenet
-RUN cd /app/imagenet && wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
-CMD ["pip", "install libs/tensorflow-1.1.0-cp27-none-linux_armv7l.whl"]
-CMD ["pip", "uninstall mock"]
-CMD ["pip", "install mock"]
+RUN cd /data && wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 
 # run robot
 CMD ["bash", "start.sh"]
