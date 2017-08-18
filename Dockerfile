@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libpng12-dev \
         libzmq3-dev \
         pkg-config \
-        python \
+        python2.7 \
         python-dev \
         python-numpy \
         python-scipy \
