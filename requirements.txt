@@ -5,3 +5,4 @@ picamera
 psutil
 flask-cors
 flask-socketio
+eventlet
