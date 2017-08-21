@@ -10,7 +10,7 @@ def get_information():
     response = []
 
     # get CPU temperature
-    cpu_temperature = int(float(os.popen('vcgencmd measure_temp').readline().replace("temp=","").replace("'C\n","")))
+    cpu_temperature = int(float(os.popen('/opt/vc/bin/vcgencmd measure_temp').readline().replace("temp=","").replace("'C\n","")))
     response.append(cpu_temperature)
 
     # get CPU usage
