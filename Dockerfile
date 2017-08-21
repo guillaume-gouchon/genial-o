@@ -3,6 +3,7 @@ FROM resin/rpi-raspbian
 # switch on systemd init system in container
 ENV INITSYSTEM on
 ENV READTHEDOCS True
+ENV VERSION=0.0.1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
