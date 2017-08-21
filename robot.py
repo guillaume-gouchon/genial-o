@@ -26,6 +26,5 @@ if __name__ == "__main__":
     # start robot and server on different processes
     p = Process(target=main, args=())
     p.start()
-    server.app.run(host="0.0.0.0", port=80, threaded=True)
-    server.startWebSocketServer()
+    server.start()
     p.join()

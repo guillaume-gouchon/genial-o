@@ -18,5 +18,6 @@ def guess():
     else:
         output = "I don't know what it is"
 
+    display.clear_text()
     display.print_text(output, 1)
     return output
