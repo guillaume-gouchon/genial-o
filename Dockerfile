@@ -8,6 +8,8 @@ ENV VERSION=0.0.1
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         curl \
+        libdbus-1-dev \
+		    libdbus-glib-1-dev \
         libfreetype6-dev \
         libpng12-dev \
         libzmq3-dev \
@@ -47,6 +49,9 @@ RUN pip install -r /requirements.txt
 
 # update Raspberry firmwares
 RUN rpi-update
+
+# video libraries (https://raspberrypi.stackexchange.com/questions/34107/libmmal-core-so-missing)
+RUN chown root.root pi_vc_core.conf && mv pi_vc_core.conf /etc/ld.so.conf && ldconfig
 
 # run robot
 CMD ["bash", "start.sh"]
