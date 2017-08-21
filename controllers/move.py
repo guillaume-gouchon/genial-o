@@ -3,8 +3,12 @@ from board import raspi_robot_board
 import detect as detect
 import recognize as recognize
 from multiprocessing import Value
+from threading import Lock
 
 auto_pilot = Value('i', 1)
+
+thread = None
+thread_lock = Lock()
 
 def go_forward(speed=1):
     print("go forward at speed", speed)
@@ -35,7 +39,10 @@ def set_auto_pilot(is_auto_pilot):
             auto_pilot.value = is_auto_pilot
 
         if is_auto_pilot == 1:
-            start_auto_pilot()
+            global thread
+            with thread_lock:
+                if thread is None:
+                    thread = Thread(target=start_auto_pilot)
 
 DISTANCE_THRESHOLD = 35 # in cm
 

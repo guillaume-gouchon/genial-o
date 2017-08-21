@@ -7,14 +7,17 @@ def guess():
     see.take_picture()
 
     print("guessing...")
+    display.clear_text()
+    display.print_text("Guessing...", 1)
     result = subprocess.check_output(["python", "/app/libs/classify_image.py", "--num_top_predictions=1", "--image_file=" + see.LATEST_PIC_PATH], stderr=subprocess.PIPE).decode('UTF-8')
+    print(result)
     split = result.split(',')
     if len(split) > 0:
         print("result =", split)
         guess = split[0]
         probability = float(re.findall(r"[-+]?\d*\.\d+|\d+", split[len(split) - 1])[0])
 
-        output = "I guess it's a " + guess + " (" + str(round(probability)) + "%)"
+        output = "Guess it's a " + guess + " " + str(round(probability)) + "%"
     else:
         output = "I don't know what it is"
 

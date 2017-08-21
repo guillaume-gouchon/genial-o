@@ -1,4 +1,4 @@
-import time
+from threading import Lock
 from flask import Flask, send_file, jsonify, request, Response
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
@@ -50,11 +50,11 @@ def get_distances():
 
 @app.route("/camera")
 def get_camera_image():
-    return Response(see.generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(see.generate_frames(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 @app.route("/last-guess")
 def get_last_image():
-    return send_file(see.LATEST_PIC_PATH, mimetype='image/jpg')
+    return send_file(see.LATEST_PIC_PATH, mimetype="image/jpg")
 
 @app.route("/print", methods=["POST"])
 def print_text():
@@ -77,18 +77,10 @@ def set_auto_pilot():
     return "OK"
 
 @app.route("/move", methods=["POST"])
-def make_move(speed, direction):
-    move.set_auto_pilot(0)
+def make_move():
+    direction = request.form["direction"]
     speed = float(request.form["speed"])
-    direction=request.form["direction"]
-    if direction == "forward":
-        move.go_forward(speed)
-    elif direction == "rotate_left":
-        move.rotate_left(speed)
-    elif direction == "rotate_right":
-        move.rotate_right(speed)
-    elif direction == "backward":
-        move.go_backward(speed)
+    _move(direction, speed)
     return "OK"
 
 @app.route("/stop", methods=["POST"])
@@ -103,37 +95,62 @@ def stop():
 global nb_ws_connections
 nb_ws_connections = 0
 
-@socketio.on('connect')
+thread = None
+thread_lock = Lock()
+
+@socketio.on("connect")
 def socket_join():
     print("client connected")
     global nb_ws_connections
     if nb_ws_connections == 0:
         nb_ws_connections += 1
-        while nb_ws_connections > 0:
-            emit('info',
-                    {
-                        'status': status.get_information(),
-                        'front': detect.get_front_distance(),
-                        'left': detect.get_left_distance(),
-                        'right': detect.get_right_distance(),
-                        'back': detect.get_back_distance()
-                    },
-                    broadcast=True
-            )
-            time.sleep(5)
+        global thread
+        with thread_lock:
+            if thread is None:
+                thread = socketio.start_background_task(target=send_info)
+
     else:
         nb_ws_connections += 1
 
-@socketio.on('disconnect')
+def send_info():
+    global nb_ws_connections
+    while nb_ws_connections > 0:
+        socketio.emit("info",
+            {
+                "status": status.get_information(),
+                "front": detect.get_front_distance(),
+                "left": detect.get_left_distance(),
+                "right": detect.get_right_distance(),
+                "back": detect.get_back_distance()
+            },
+            broadcast=True
+        )
+        socketio.sleep(5)
+    nb_ws_connections = 0
+
+@socketio.on("disconnect")
 def socket_leave():
     print("client disconnected")
     global nb_ws_connections
-    nb_ws_connections -= 1
+    if nb_ws_connections > 0:
+        nb_ws_connections -= 1
 
-@socketio.on('move')
+@socketio.on("move")
 def socket_move(message):
-    make_move(message.speed, message.direction)
+    print("move", message)
+    _move(message["direction"], message["speed"])
 
-@socketio.on('stop')
+@socketio.on("stop")
 def socket_stop(message):
     stop()
+
+def _move(direction, speed):
+    move.set_auto_pilot(0)
+    if direction == "forward":
+        move.go_forward(speed)
+    elif direction == "rotate_left":
+        move.rotate_left(speed)
+    elif direction == "rotate_right":
+        move.rotate_right(speed)
+    elif direction == "backward":
+        move.go_backward(speed)
