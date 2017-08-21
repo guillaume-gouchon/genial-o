@@ -3,7 +3,7 @@ from board import raspi_robot_board
 import detect as detect
 import recognize as recognize
 from multiprocessing import Value
-from threading import Lock
+from threading import Lock, Thread
 
 auto_pilot = Value('i', 1)
 
@@ -43,6 +43,7 @@ def set_auto_pilot(is_auto_pilot):
             with thread_lock:
                 if thread is None:
                     thread = Thread(target=start_auto_pilot)
+                    thread.start()
 
 DISTANCE_THRESHOLD = 35 # in cm
 
