@@ -7,7 +7,7 @@ def guess():
     see.take_picture()
 
     print("guessing...")
-    result = subprocess.check_output(["python", "/app/libs/classify_image.py", "--num_top_predictions 1", "--image_file " + see.LATEST_PIC_PATH], stderr=subprocess.STDOUT).decode('UTF-8')
+    result = subprocess.check_output(["python", "/app/libs/classify_image.py", "--num_top_predictions=1", "--image_file=" + see.LATEST_PIC_PATH], stderr=subprocess.PIPE).decode('UTF-8')
     split = result.split(',')
     if len(split) > 0:
         guess = split[0]

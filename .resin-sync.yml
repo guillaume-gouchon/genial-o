@@ -4,3 +4,4 @@ destination: /app
 ignore:
   - .git
   - node_modules/
+  - libs/classify_image_graph_def.pb
