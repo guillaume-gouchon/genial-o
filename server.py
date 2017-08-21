@@ -52,7 +52,7 @@ def get_distances():
 def get_camera_image():
     return Response(see.generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route("/last-image")
+@app.route("/last-guess")
 def get_last_image():
     return send_file(see.LATEST_PIC_PATH, mimetype='image/jpg')
 
