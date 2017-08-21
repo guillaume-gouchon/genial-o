@@ -128,4 +128,10 @@ $(document).ready(function () {
   initTouchEvents('rotate-right-btn', 'rotate_right');
   initTouchEvents('backward-btn', 'backward');
 
+  var socket = io.connect(API_URL + ':5000');
+  socket.on('connect', function() {
+    console.log('connected to websockets server')
+    socket.emit('my event', {data: 'I\'m connected!'});
+  });
+
 });

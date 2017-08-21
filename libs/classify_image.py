@@ -125,7 +125,6 @@ def create_graph():
     graph_def = tf.GraphDef()
     graph_def.ParseFromString(f.read())
     _ = tf.import_graph_def(graph_def, name='')
-    print ("graph created")
 
 
 def run_inference_on_image(image):
@@ -145,7 +144,6 @@ def run_inference_on_image(image):
   create_graph()
 
   with tf.Session() as sess:
-    print ("session created")
 
     # Some useful tensors:
     # 'softmax:0': A tensor containing the normalized prediction across
@@ -159,7 +157,6 @@ def run_inference_on_image(image):
     predictions = sess.run(softmax_tensor,
                            {'DecodeJpeg/contents:0': image_data})
     predictions = np.squeeze(predictions)
-    print ("predictions ready")
 
     # Creates node ID --> English string lookup.
     node_lookup = NodeLookup()
@@ -168,7 +165,7 @@ def run_inference_on_image(image):
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id)
       score = predictions[node_id]
-      print('%s (score = %.5f)' % (human_string, score))
+      print('%s,%.0f' % (human_string, score))
 
 
 def maybe_download_and_extract():
@@ -184,15 +181,12 @@ def maybe_download_and_extract():
           filename, float(count * block_size) / float(total_size) * 100.0))
       sys.stdout.flush()
     filepath, _ = urllib.request.urlretrieve(DATA_URL, filepath, _progress)
-    print()
     statinfo = os.stat(filepath)
-    print('Successfully downloaded', filename, statinfo.st_size, 'bytes.')
     tarfile.open(filepath, 'r:gz').extractall(dest_directory)
 
 
 def main(_):
   maybe_download_and_extract()
-  print('file', FLAGS.image_file)
   image = (FLAGS.image_file)
   run_inference_on_image(image)
 

@@ -13,6 +13,10 @@ app = Flask(__name__)
 app.use_reloader = False
 CORS(app)
 
+def startWebSocketServer():
+    socketio = SocketIO(app)
+    socketio.run(app)
+
 @app.route("/")
 def hello():
     return "Hello, je suis GENIAL-O"

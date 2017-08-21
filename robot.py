@@ -27,4 +27,5 @@ if __name__ == "__main__":
     p = Process(target=main, args=())
     p.start()
     server.app.run(host="0.0.0.0", port=80, threaded=True)
+    server.startWebSocketServer()
     p.join()
