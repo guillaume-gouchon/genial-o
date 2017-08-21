@@ -36,9 +36,7 @@ COPY . /app
 WORKDIR /app
 
 # install Tensorflow
-RUN wget https://github.com/samjabrahams/tensorflow-on-raspberry-pi/releases/download/v1.1.0/tensorflow-1.1.0-cp27-none-linux_armv7l.whl && \
-        mv tensorflow-1.1.0-cp27-none-linux_armv7l.whl tensorflow-1.1.0-cp27-none-any.whl
-RUN pip2 install tensorflow-1.1.0-cp27-none-any.whl
+RUN pip2 install libs/tensorflow-1.1.0-cp27-none-any.whl
 RUN pip uninstall -y mock && pip install mock
 RUN cd /app/libs/ && wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 
