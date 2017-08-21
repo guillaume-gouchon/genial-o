@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         pkg-config \
         python2.7 \
         python-dev \
-        python-numpy \
         python-scipy \
         python-smbus \
         espeak \
@@ -36,7 +35,7 @@ WORKDIR /app
 # install Tensorflow
 RUN wget https://github.com/samjabrahams/tensorflow-on-raspberry-pi/releases/download/v1.1.0/tensorflow-1.1.0-cp27-none-linux_armv7l.whl
 RUN mv tensorflow-1.1.0-cp27-none-linux_armv7l.whl tensorflow-1.1.0-cp27-none-linux_armv6l.whl
-RUN pip install tensorflow-1.1.0-cp27-none-linux_armv6l.whl
+RUN pip2 install tensorflow-1.1.0-cp27-none-linux_armv6l.whl
 RUN pip uninstall mock
 RUN pip install mock
 RUN cd /app/libs/ && wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
