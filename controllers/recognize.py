@@ -1,3 +1,4 @@
+import re
 import see as see
 import display as display
 import subprocess

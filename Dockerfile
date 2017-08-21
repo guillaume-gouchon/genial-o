@@ -51,7 +51,7 @@ RUN pip install -r /requirements.txt
 RUN rpi-update
 
 # video libraries (https://raspberrypi.stackexchange.com/questions/34107/libmmal-core-so-missing)
-RUN chown root.root pi_vc_core.conf && mv pi_vc_core.conf /etc/ld.so.conf && ldconfig
+RUN echo /opt/vc/lib > pi_vc_core.conf && chown root.root pi_vc_core.conf && mv pi_vc_core.conf /etc/ld.so.conf && ldconfig
 
 # run robot
 CMD ["bash", "start.sh"]
