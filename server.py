@@ -17,6 +17,7 @@ app.threaded = True
 CORS(app)
 socketio = SocketIO(app)
 
+
 def start():
     socketio.run(app, host="0.0.0.0", port=80, log_output=False)
 
@@ -31,12 +32,6 @@ def hello():
 def get_information():
     return jsonify(
         status = status.get_information()
-    )
-
-@app.route("/guess")
-def guess():
-    return jsonify(
-        guess = recognize.guess(),
     )
 
 @app.route("/detect")
@@ -98,6 +93,9 @@ nb_ws_connections = 0
 thread = None
 thread_lock = Lock()
 
+thread_guess = None
+thread_guess_lock = Lock()
+
 @socketio.on("connect")
 def socket_join():
     print("client connected")
@@ -107,26 +105,10 @@ def socket_join():
         global thread
         with thread_lock:
             if thread is None:
-                thread = socketio.start_background_task(target=send_info)
+                thread = socketio.start_background_task(target=_send_info)
 
     else:
         nb_ws_connections += 1
-
-def send_info():
-    global nb_ws_connections
-    while nb_ws_connections > 0:
-        socketio.emit("info",
-            {
-                "status": status.get_information(),
-                "front": detect.get_front_distance(),
-                "left": detect.get_left_distance(),
-                "right": detect.get_right_distance(),
-                "back": detect.get_back_distance()
-            },
-            broadcast=True
-        )
-        socketio.sleep(5)
-    nb_ws_connections = 0
 
 @socketio.on("disconnect")
 def socket_leave():
@@ -143,6 +125,37 @@ def socket_move(message):
 @socketio.on("stop")
 def socket_stop(message):
     stop()
+
+@socketio.on("guess")
+def guess(message):
+    global thread_guess
+    with thread_guess_lock:
+        if thread_guess is None:
+            thread_guess = socketio.start_background_task(target=_send_guess)
+
+def _send_info():
+    global nb_ws_connections
+    while nb_ws_connections > 0:
+        socketio.emit("info",
+            {
+                "status": status.get_information(),
+                "front": detect.get_front_distance(),
+                "left": detect.get_left_distance(),
+                "right": detect.get_right_distance(),
+                "back": detect.get_back_distance()
+            },
+            broadcast=True
+        )
+        socketio.sleep(5)
+    nb_ws_connections = 0
+
+def _send_guess():
+    socketio.emit("guess",
+        {
+            "guess": recognize.guess(),
+        },
+        broadcast=True
+    )
 
 def _move(direction, speed):
     move.set_auto_pilot(0)

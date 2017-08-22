@@ -7,15 +7,12 @@ import os.path
 import numpy as np
 import tensorflow as tf
 
-import see as see
-import display as display
+import controllers.display as display
+import controllers.see as see
 
 
 model_dir = "/app/libs"
 image_path = see.LATEST_PIC_PATH
-
-# Creates graph from saved GraphDef.
-create_graph()
 
 def guess():
     see.take_picture()
@@ -42,6 +39,9 @@ def run_inference_on_image():
     tf.logging.fatal('File does not exist %s', image_path)
   image_data = tf.gfile.FastGFile(image_path, 'rb').read()
 
+  # Creates graph from saved GraphDef.
+  create_graph()
+
   with tf.Session() as sess:
     # Some useful tensors:
     # 'softmax:0': A tensor containing the normalized prediction across
@@ -63,7 +63,7 @@ def run_inference_on_image():
     number_of_predictions = 1
     top_k = predictions.argsort()[-number_of_predictions:][::-1]
     for node_id in top_k:
-      human_string = node_lookup.id_to_string(node_id)
+      human_string = node_lookup.id_to_string(node_id).split(",")[0]
       score = predictions[node_id]
       print("prediction = ", human_string, score, "%")
       return [human_string, score]

@@ -29,5 +29,5 @@ class HCSR04(object):
         self._wait_for_echo(False)
         finish = time.time()
         pulse_len = finish - start
-        distance_cm = pulse_len / 0.000058
+        distance_cm = pulse_len * 17150
         return distance_cm

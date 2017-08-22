@@ -35,6 +35,11 @@ $(document).ready(function () {
     }
   });
 
+  socket.on('guess', function(data) {
+    console.log('guess response =', data);
+    Materialize.toast(data.guess, 5000);
+  });
+
   move = function (direction) {
     $('#auto-pilot').prop('checked', false);
     socket.emit('move', {
@@ -49,14 +54,8 @@ $(document).ready(function () {
   };
 
   guess = function () {
-    if (!loading) {
-      showLoading();
-      $.get(API_URL + '/guess', function (data) {
-        hideLoading();
-        console.log(data);
-        Materialize.toast(data.guess, 2000);
-      });
-    }
+    socket.emit('guess', {});
+    Materialize.toast('Guessing...', 5000);
   };
 
   talk = function () {
