@@ -16,7 +16,7 @@ html {
 }
 
 .container {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
 }
 
 #display button {
@@ -28,7 +28,7 @@ html {
 }
 
 #move img {
-  height: 20rem;
+  height: 18rem;
   width: 100%;
 }
 
@@ -51,7 +51,7 @@ html {
 
 .auto-pilot-form {
   position: absolute;
-  top: 24rem;
+  top: 22rem;
   right: 3rem;
 }
 
