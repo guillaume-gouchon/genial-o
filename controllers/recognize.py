@@ -14,6 +14,17 @@ import controllers.see as see
 model_dir = "/app/libs"
 image_path = see.LATEST_PIC_PATH
 
+# Creates graph from saved graph_def.pb.
+with tf.gfile.FastGFile(os.path.join(model_dir, 'classify_image_graph_def.pb'), 'rb') as f:
+graph_def = tf.GraphDef()
+graph_def.ParseFromString(f.read())
+_ = tf.import_graph_def(graph_def, name='')
+print("Graph created")
+
+# Creates node ID --> English string lookup.
+node_lookup = NodeLookup()
+print("Node Loopup created")
+
 def guess():
     see.take_picture()
 
@@ -26,21 +37,10 @@ def guess():
     display.print_text(output, 1)
     return output
 
-def create_graph():
-  # Creates graph from saved graph_def.pb.
-  with tf.gfile.FastGFile(os.path.join(model_dir, 'classify_image_graph_def.pb'), 'rb') as f:
-    graph_def = tf.GraphDef()
-    graph_def.ParseFromString(f.read())
-    _ = tf.import_graph_def(graph_def, name='')
-    print("Graph created")
-
 def run_inference_on_image():
   if not tf.gfile.Exists(image_path):
     tf.logging.fatal('File does not exist %s', image_path)
   image_data = tf.gfile.FastGFile(image_path, 'rb').read()
-
-  # Creates graph from saved GraphDef.
-  create_graph()
 
   with tf.Session() as sess:
     # Some useful tensors:
@@ -54,17 +54,14 @@ def run_inference_on_image():
     print("Session created")
     softmax_tensor = sess.graph.get_tensor_by_name('softmax:0')
     predictions = sess.run(softmax_tensor, {'DecodeJpeg/contents:0': image_data})
-    predictions = np.squeeze(predictions)
     print("Got predictions")
-
-    # Creates node ID --> English string lookup.
-    node_lookup = NodeLookup()
+    predictions = np.squeeze(predictions)
 
     number_of_predictions = 1
     top_k = predictions.argsort()[-number_of_predictions:][::-1]
     for node_id in top_k:
       human_string = node_lookup.id_to_string(node_id).split(",")[0]
-      score = predictions[node_id]
+      score = predictions[node_id] * 100
       print("prediction = ", human_string, score, "%")
       return [human_string, score]
 
