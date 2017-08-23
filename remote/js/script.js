@@ -28,10 +28,10 @@ $(document).ready(function () {
       $('.cpu-usage').text(data.status[1] + '%');
       $('.ram-usage').text(data.status[2] + '%');
 
-      $('.front-sensor').text(Math.round(data.front) + ' cm');
+      $('.front-left-sensor').text(Math.round(data.front_left) + ' cm');
+      $('.front-right-sensor').text(Math.round(data.front_right) + ' cm');
       $('.left-sensor').text(Math.round(data.left) + ' cm');
       $('.right-sensor').text(Math.round(data.right) + ' cm');
-      $('.back-sensor').text(Math.round(data.back) + ' cm');
     }
   });
 
