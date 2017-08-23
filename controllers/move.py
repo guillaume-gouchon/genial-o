@@ -50,7 +50,7 @@ DISTANCE_THRESHOLD = 35 # in cm
 def start_auto_pilot():
     print("start auto pilot")
     go_forward()
-    while auto_pilot.value == 1 and detect.get_front_distance() > DISTANCE_THRESHOLD:
+    while auto_pilot.value == 1 and detect.get_front_left_distance() > DISTANCE_THRESHOLD and detect.get_front_right_distance() > DISTANCE_THRESHOLD:
         print("auto pilot ON: going forward...")
         time.sleep(0.2)
 

@@ -38,10 +38,10 @@ def get_information():
 @app.route("/detect")
 def get_distances():
     return jsonify(
-        front = detect.get_front_distance(),
+        front_left = detect.get_front_left_distance(),
+        front_right = detect.get_front_right_distance(),
         left = detect.get_left_distance(),
         right = detect.get_right_distance(),
-        back = detect.get_back_distance(),
     )
 
 @app.route("/camera")
@@ -132,10 +132,10 @@ def _send_info():
         socketio.emit("info",
             {
                 "status": status.get_information(),
-                "front": detect.get_front_distance(),
+                "front_left": detect.get_front_left_distance(),
+                "front_right": detect.get_front_right_distance(),
                 "left": detect.get_left_distance(),
                 "right": detect.get_right_distance(),
-                "back": detect.get_back_distance()
             },
             broadcast=True
         )
