@@ -28,13 +28,21 @@ html {
 }
 
 #move img {
-  height: 16rem;
+  height: 20rem;
   width: 100%;
-  margin-bottom: 1rem;
 }
 
 #move .row {
   margin-bottom: 0;
+}
+
+#move table {
+  margin: 0.5rem 0;
+}
+
+#move table tr td {
+  padding: 0.5rem;
+  font-size: 0.6rem;
 }
 
 .switch {
@@ -43,8 +51,12 @@ html {
 
 .auto-pilot-form {
   position: absolute;
-  top: 19.5rem;
-  right: 4.0rem;
+  top: 24rem;
+  right: 3rem;
+}
+
+.auto-pilot-form label {
+  font-size: 0.7rem;
 }
 
 .loading {

@@ -14,17 +14,6 @@ import controllers.see as see
 model_dir = "/app/libs"
 image_path = see.LATEST_PIC_PATH
 
-# Creates graph from saved graph_def.pb.
-with tf.gfile.FastGFile(os.path.join(model_dir, 'classify_image_graph_def.pb'), 'rb') as f:
-graph_def = tf.GraphDef()
-graph_def.ParseFromString(f.read())
-_ = tf.import_graph_def(graph_def, name='')
-print("Graph created")
-
-# Creates node ID --> English string lookup.
-node_lookup = NodeLookup()
-print("Node Loopup created")
-
 def guess():
     see.take_picture()
 
@@ -126,3 +115,16 @@ class NodeLookup(object):
     if node_id not in self.node_lookup:
       return ''
     return self.node_lookup[node_id]
+
+
+
+# Creates graph from saved graph_def.pb.
+with tf.gfile.FastGFile(os.path.join(model_dir, 'classify_image_graph_def.pb'), 'rb') as f:
+    graph_def = tf.GraphDef()
+    graph_def.ParseFromString(f.read())
+    _ = tf.import_graph_def(graph_def, name='')
+    print("Graph created")
+
+# Creates node ID --> English string lookup.
+node_lookup = NodeLookup()
+print("Node Loopup created")

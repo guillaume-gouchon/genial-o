@@ -1,7 +1,7 @@
-from threading import Lock
 from flask import Flask, send_file, jsonify, request, Response
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
+import eventlet
 
 import controllers.display as display
 import controllers.detect as detect
@@ -17,6 +17,7 @@ app.threaded = True
 CORS(app)
 socketio = SocketIO(app)
 
+eventlet.monkey_patch()
 
 def start():
     socketio.run(app, host="0.0.0.0", port=80, log_output=False)
@@ -68,7 +69,7 @@ def make_talk():
 @app.route("/pilot", methods=["POST"])
 def set_auto_pilot():
     auto_pilot = int(float(request.form["auto_pilot"]))
-    move.set_auto_pilot(auto_pilot)
+    eventlet.spawn(move.set_auto_pilot, auto_pilot)
     return "OK"
 
 @app.route("/move", methods=["POST"])
@@ -90,11 +91,7 @@ def stop():
 global nb_ws_connections
 nb_ws_connections = 0
 
-thread = None
-thread_lock = Lock()
-
-thread_guess = None
-thread_guess_lock = Lock()
+guess_ready = True;
 
 @socketio.on("connect")
 def socket_join():
@@ -102,11 +99,7 @@ def socket_join():
     global nb_ws_connections
     if nb_ws_connections == 0:
         nb_ws_connections += 1
-        global thread
-        with thread_lock:
-            if thread is None:
-                thread = socketio.start_background_task(target=_send_info)
-
+        eventlet.spawn(_send_info)
     else:
         nb_ws_connections += 1
 
@@ -128,10 +121,10 @@ def socket_stop(message):
 
 @socketio.on("guess")
 def guess(message):
-    global thread_guess
-    with thread_guess_lock:
-        if thread_guess is None:
-            thread_guess = socketio.start_background_task(target=_send_guess)
+    global guess_ready
+    if guess_ready:
+        guess_ready = False
+        eventlet.spawn(_send_guess)
 
 def _send_info():
     global nb_ws_connections
@@ -146,7 +139,7 @@ def _send_info():
             },
             broadcast=True
         )
-        socketio.sleep(5)
+        socketio.sleep(3)
     nb_ws_connections = 0
 
 def _send_guess():
@@ -156,6 +149,8 @@ def _send_guess():
         },
         broadcast=True
     )
+    global guess_ready
+    guess_ready = True
 
 def _move(direction, speed):
     move.set_auto_pilot(0)
