@@ -38,7 +38,7 @@ COPY . /app
 WORKDIR /app
 
 # install Tensorflow
-RUN pip2 install libs/tensorflow-1.1.0-cp27-none-any.whl
+RUN pip2 install libs/tensorflow-1.1.0-cp27-none-any.whl --ignore-installed
 RUN pip uninstall -y mock && pip install mock
 RUN cd /app/libs/ && wget http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 
