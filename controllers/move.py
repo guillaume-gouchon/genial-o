@@ -33,7 +33,7 @@ def stop():
 def shoot():
     print("fire !")
     raspi_robot_board.set_oc1(1)
-    time.sleep(0.5)
+    time.sleep(1)
     raspi_robot_board.set_oc1(0)
 
 def set_auto_pilot(is_auto_pilot):
