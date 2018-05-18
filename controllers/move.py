@@ -32,7 +32,7 @@ def stop():
 
 def shoot():
     print("fire !")
-    raspi_robot_board.set_oc1(0.5)
+    raspi_robot_board.set_oc1(1)
     time.sleep(0.5)
     raspi_robot_board.set_oc1(0)
 
