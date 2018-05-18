@@ -74,6 +74,17 @@ $(document).ready(function () {
     }
   };
 
+  shoot = function () {
+    showLoading();
+    $.post(API_URL + '/shoot', {}, function (data) {
+      hideLoading();
+      console.log(data);
+      if (data == 'OK') {
+        Materialize.toast('Fire !', 2000);
+      }
+    });
+  };
+
   printOnScreen = function () {
     var text = $('#input-to-display').val();
     if (text && text.length && !loading) {

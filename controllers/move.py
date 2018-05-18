@@ -30,6 +30,12 @@ def stop():
     print("stop")
     raspi_robot_board.set_motors(0, 0, 0, 0)
 
+def shoot():
+    print("fire !")
+    raspi_robot_board.set_oc1(0.5)
+    time.sleep(0.5)
+    raspi_robot_board.set_oc1(0)
+
 def set_auto_pilot(is_auto_pilot):
     if (auto_pilot.value != is_auto_pilot):
         print("set auto pilot", is_auto_pilot)

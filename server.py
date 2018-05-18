@@ -60,6 +60,11 @@ def print_text():
     display.print_text(text, line)
     return "OK"
 
+@app.route("/shoot", methods=["POST"])
+def shoot():
+    move.shoot()
+    return "OK"
+
 @app.route("/talk", methods=["POST"])
 def make_talk():
     text = request.form["text"]
