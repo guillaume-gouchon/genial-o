@@ -16,6 +16,7 @@ def main():
     display.set_right_led(0)
     display.print_text("Hello, I am GENIAL-O", 1)
 
+    # display robot status
     CheckInternet()
     CheckHardware()
 

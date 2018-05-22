@@ -62,7 +62,6 @@ class CheckHardware(Thread):
         Thread.__init__(self)
 
         self.interval = interval
-        self.is_connected = False
 
         self.daemon = True
         self.start()

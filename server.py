@@ -96,7 +96,7 @@ def stop():
 global nb_ws_connections
 nb_ws_connections = 0
 
-guess_ready = True;
+guess_ready = True
 
 @socketio.on("connect")
 def socket_join():
