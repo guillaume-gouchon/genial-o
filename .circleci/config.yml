@@ -40,11 +40,12 @@ commands:
 
 jobs:
   build_deploy_prod:
-    working_directory: /remote
+    working_directory: ~/genial-o/remote
     docker:
       - image: google/cloud-sdk
     steps:
-      - checkout
+      - checkout:
+        path: ~/genial-o
       - login_on_gcp:
           gcloud_key: $GCLOUD_SERVICE_KEY_PROD
           project: api-project-725491021247
