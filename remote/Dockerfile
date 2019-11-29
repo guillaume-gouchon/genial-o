@@ -1,8 +1,8 @@
-FROM trinitronx:python-simplehttpserver
+FROM python:3.8.0-slim
 
 COPY . /usr/src
 WORKDIR /usr/src
 
-CMD ["bash", "run.sh"]
+CMD python -m SimpleHTTPServer 8080
 
 EXPOSE 8080
