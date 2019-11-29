@@ -45,7 +45,7 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - checkout:
-        path: ~/genial-o
+          path: ~/genial-o
       - login_on_gcp:
           gcloud_key: $GCLOUD_SERVICE_KEY_PROD
           project: api-project-725491021247
