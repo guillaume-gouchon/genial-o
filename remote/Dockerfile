@@ -1,4 +1,4 @@
-FROM python:3.8.0-slim
+FROM trinitronx:python-simplehttpserver
 
 COPY . /usr/src
 WORKDIR /usr/src
