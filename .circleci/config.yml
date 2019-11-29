@@ -40,7 +40,7 @@ commands:
 
 jobs:
   build_deploy_prod:
-    working_directory: remote
+    working_directory: /remote
     docker:
       - image: google/cloud-sdk
     steps:
